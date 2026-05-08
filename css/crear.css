@@ -1,0 +1,154 @@
+/* PAGE: CREAR */
+#page-crear {
+  padding: 0 20px;
+  animation: fadeIn 0.3s;
+}
+
+.crear-hero {
+  text-align: center;
+  padding: 32px 0 28px;
+  min-height: 260px;
+}
+.crear-hero h1 {
+  font-family: "Fredoka", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.crear-hero p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.scan-btn-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 28px 0 34px;
+}
+.scan-btn {
+  width: 160px;
+  height: 160px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 14px;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  text-align: center;
+  box-sizing: border-box;
+}
+.scan-btn .cam-icon {
+  font-size: 38px;
+  line-height: 1;
+}
+.scan-btn > span:not(.cam-icon) {
+  display: block;
+  max-width: 108px;
+  line-height: 1.15;
+  font-size: 16px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.recientes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.recientes-header h3 {
+  font-size: 18px;
+  font-weight: 800;
+}
+.recientes-header a {
+  font-size: 14px;
+  color: var(--teal);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.recientes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+/* center page content and avoid empty look */
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page > .page-inner {
+  width: 100%;
+  max-width: 640px;
+  padding-top: 10px;
+  padding-bottom: 18px;
+}
+
+@media (max-width: 700px) {
+  /* on small screens keep normal flow to avoid overlap with header/nav */
+  .page {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 12px;
+  }
+}
+.obra-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.obra-card .obra-emoji {
+  font-size: 70px;
+}
+.obra-card .obra-name {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px;
+  text-align: center;
+}
+
+.pro-tip {
+  background: #fff8ef;
+  border: 2px dashed #f5a62380;
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+/* make sure the tip has enough space from fixed bottom nav on small screens */
+@media (max-width: 520px) {
+  .pro-tip {
+    margin-bottom: 120px;
+  }
+}
+.pro-tip .tip-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pro-tip p {
+  font-size: 13px;
+  line-height: 1.5;
+}
