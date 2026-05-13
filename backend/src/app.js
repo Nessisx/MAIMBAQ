@@ -22,6 +22,10 @@ const apiRoutes = require('./routes');
 const { notFound } = require('./middlewares/notFound.middleware');
 const { errorHandler } = require('./middlewares/error.middleware');
 
+const projectRoot = path.join(__dirname, '..', '..');
+const frontendRoot = path.join(projectRoot, 'frontend');
+const pagesRoot = path.join(projectRoot, 'pages');
+
 const app = express();
 
 app.use(helmet());
@@ -42,25 +46,40 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
+app.use('/frontend', express.static(frontendRoot));
+app.use('/pages', express.static(pagesRoot));
+
 app.get('/', (req, res) => {
-  res.json({
-    name: 'MAIMBAQ API',
-    status: 'ok',
-    message: 'Backend activo y conectado a MongoDB.',
-  });
+  res.sendFile(path.join(frontendRoot, 'public', 'index.html'));
 });
 
 app.use('/api', apiRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const port = process.env.PORT || 5000;
+const basePort = Number(process.env.PORT || 5000);
+
+const listenOnPort = (candidatePort, attemptsLeft) =>
+  new Promise((resolve, reject) => {
+    const server = app.listen(candidatePort, () => resolve({ server, port: candidatePort }));
+
+    server.on('error', (error) => {
+      if (error.code === 'EADDRINUSE' && attemptsLeft > 0) {
+        server.close(() => {
+          resolve(listenOnPort(candidatePort + 1, attemptsLeft - 1));
+        });
+        return;
+      }
+
+      reject(error);
+    });
+  });
 
 const startServer = async () => {
   await connectDB();
-  app.listen(port, () => {
-    console.log(`MAIMBAQ API ejecutándose en el puerto ${port}`);
-  });
+
+  const { port } = await listenOnPort(basePort, 5);
+  console.log(`MAIMBAQ API ejecutándose en http://localhost:${port}`);
 };
 
 if (require.main === module) {
