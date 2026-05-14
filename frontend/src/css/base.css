@@ -244,10 +244,18 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   gap: 10px;
+  pointer-events: none;
 }
 .install-banner.show {
   display: flex;
   animation: slideUp 0.28s ease-out;
+}
+
+.install-banner-row,
+.install-banner small,
+.install-banner .install-btn-yes,
+.install-banner .install-btn-no {
+  pointer-events: auto;
 }
 
 .install-banner-row {

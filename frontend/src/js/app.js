@@ -110,6 +110,7 @@
 
   // Generation flow: datos -> carga -> resultado
   function startGeneratingFlow() {
+    dismissInstall();
     const obra =
       document.getElementById("input-obra")?.value.trim() || "Obra mágica";
     const artista =
