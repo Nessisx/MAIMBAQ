@@ -214,6 +214,11 @@ body {
   font-size: 13px;
   color: var(--text-muted);
 }
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
 .modal-close {
   width: 100%;
   background: var(--gold);
@@ -224,7 +229,14 @@ body {
   font-size: 18px;
   color: #fff;
   cursor: pointer;
-  margin-top: 16px;
+}
+.modal-actions .modal-close {
+  width: auto;
+  flex: 1;
+}
+.modal-download-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* INSTALL BANNER */

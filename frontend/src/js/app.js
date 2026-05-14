@@ -7,30 +7,169 @@
   const INSTALL_BANNER_DISMISSED_KEY = "mambaq_install_banner_dismissed_v1";
 
   const defaultObras = () => [
-    { emoji: "🐘", name: "Party Elephant", border: "gold", line: "gold" },
-    { emoji: "🍕🚀", name: "Pizza espacial", border: "teal", line: "teal" },
-    { emoji: "🐉", name: "Dragón arcoiris", border: "gold", line: "gold" },
-    { emoji: "🐱🧁", name: "GaCupcake", border: "teal", line: "teal" },
-    { emoji: "🌀", name: "Oceano Neón", border: "gold", line: "gold" },
-    { emoji: "🍦🏰", name: "Castillo dulce", border: "teal", line: "teal" },
+    {
+      id: crypto.randomUUID(),
+      emoji: "🐘",
+      nombre: "Party Elephant",
+      artista: "Equipo MAIMBAQ",
+      estilo: "Divertido",
+      fecha: new Date().toLocaleDateString("es-CO"),
+      createdAt: Date.now() - 600000,
+      photo: "",
+      border: "gold",
+      line: "gold",
+      ratingTotal: 18,
+      ratingCount: 4,
+    },
+    {
+      id: crypto.randomUUID(),
+      emoji: "🍕🚀",
+      nombre: "Pizza espacial",
+      artista: "Equipo MAIMBAQ",
+      estilo: "Fantasia",
+      fecha: new Date().toLocaleDateString("es-CO"),
+      createdAt: Date.now() - 500000,
+      photo: "",
+      border: "teal",
+      line: "teal",
+      ratingTotal: 15,
+      ratingCount: 3,
+    },
+    {
+      id: crypto.randomUUID(),
+      emoji: "🐉",
+      nombre: "Dragón arcoiris",
+      artista: "Equipo MAIMBAQ",
+      estilo: "Aventura",
+      fecha: new Date().toLocaleDateString("es-CO"),
+      createdAt: Date.now() - 400000,
+      photo: "",
+      border: "gold",
+      line: "gold",
+      ratingTotal: 22,
+      ratingCount: 5,
+    },
+    {
+      id: crypto.randomUUID(),
+      emoji: "🐱🧁",
+      nombre: "GaCupcake",
+      artista: "Equipo MAIMBAQ",
+      estilo: "Dulce",
+      fecha: new Date().toLocaleDateString("es-CO"),
+      createdAt: Date.now() - 300000,
+      photo: "",
+      border: "teal",
+      line: "teal",
+      ratingTotal: 12,
+      ratingCount: 3,
+    },
+    {
+      id: crypto.randomUUID(),
+      emoji: "🌀",
+      nombre: "Oceano Neón",
+      artista: "Equipo MAIMBAQ",
+      estilo: "Neon",
+      fecha: new Date().toLocaleDateString("es-CO"),
+      createdAt: Date.now() - 200000,
+      photo: "",
+      border: "gold",
+      line: "gold",
+      ratingTotal: 20,
+      ratingCount: 4,
+    },
+    {
+      id: crypto.randomUUID(),
+      emoji: "🍦🏰",
+      nombre: "Castillo dulce",
+      artista: "Equipo MAIMBAQ",
+      estilo: "Magico",
+      fecha: new Date().toLocaleDateString("es-CO"),
+      createdAt: Date.now() - 100000,
+      photo: "",
+      border: "teal",
+      line: "teal",
+      ratingTotal: 16,
+      ratingCount: 4,
+    },
   ];
 
-  let museoObras =
-    JSON.parse(localStorage.getItem(MUSEO_KEY)) || defaultObras();
+  const normalizeObra = (obra) => ({
+    id: obra.id || crypto.randomUUID(),
+    emoji: obra.emoji || "🎨",
+    nombre: obra.nombre || obra.name || "Obra",
+    artista: obra.artista || obra.author || "Artista",
+    estilo: obra.estilo || obra.style || "Libre",
+    fecha: obra.fecha || new Date().toLocaleDateString("es-CO"),
+    createdAt: Number(obra.createdAt || 0),
+    photo: obra.photo || "",
+    border: obra.border || "gold",
+    line: obra.line || "gold",
+    ratingTotal: Number(obra.ratingTotal || obra.rating || 0),
+    ratingCount: Number(obra.ratingCount || 0),
+  });
+
+  const getRatingAverage = (obra) =>
+    obra.ratingCount > 0 ? obra.ratingTotal / obra.ratingCount : 0;
+
+  const formatRating = (obra) => {
+    const average = getRatingAverage(obra);
+    return average ? average.toFixed(1) : "0.0";
+  };
+
+  let museoObras = (
+    JSON.parse(localStorage.getItem(MUSEO_KEY)) || defaultObras()
+  ).map(normalizeObra);
+  let currentModalArtwork = null;
 
   function saveMuseo() {
     localStorage.setItem(MUSEO_KEY, JSON.stringify(museoObras));
   }
 
+  function applyMuseoSort(order) {
+    const sorted = [...museoObras];
+    if (order === "popular") {
+      sorted.sort((a, b) => {
+        const scoreDelta = getRatingAverage(b) - getRatingAverage(a);
+        if (scoreDelta !== 0) return scoreDelta;
+        return (b.ratingCount || 0) - (a.ratingCount || 0);
+      });
+    } else if (order === "toprated") {
+      sorted.sort((a, b) => getRatingAverage(b) - getRatingAverage(a));
+    } else {
+      sorted.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    }
+    return sorted;
+  }
+
   function renderMuseo() {
     const grid = document.getElementById("museo-grid");
     if (!grid) return;
-    grid.innerHTML = museoObras
+    const sortSelect = document.getElementById("museum-sort");
+    const sortOrder = sortSelect?.value || "latest";
+    const obras = applyMuseoSort(sortOrder);
+    grid.innerHTML = obras
       .map(
         (o, i) => `
-      <div class="museo-card ${o.border}-border" data-index="${i}">
-        <div class="museo-card-img">${o.emoji}</div>
-        <div class="museo-card-name">${o.name}</div>
+      <div class="museo-card ${o.border}-border" data-id="${o.id}">
+        <div class="museo-card-media">
+          ${o.photo ? `<img class="museo-card-photo" src="${o.photo}" alt="${o.nombre}" />` : `<div class="museo-card-img">${o.emoji}</div>`}
+          <button class="museo-download" type="button" data-download-id="${o.id}" aria-label="Descargar imagen">⬇️</button>
+        </div>
+        <div class="museo-card-name">${o.nombre}</div>
+        <div class="museo-card-meta">${o.artista} · ${o.estilo}</div>
+        <div class="museo-card-date">${o.fecha}</div>
+        <div class="museo-card-rating" aria-label="Rating promedio ${formatRating(o)} de 5">
+          ${"★".repeat(Math.max(1, Math.round(getRatingAverage(o) || 1)))}
+          <span>${formatRating(o)} (${o.ratingCount})</span>
+        </div>
+        <div class="museo-rating-actions" data-rating-id="${o.id}">
+          ${[1, 2, 3, 4, 5]
+            .map(
+              (star) =>
+                `<button class="rating-star" type="button" data-rating-value="${star}" aria-label="Puntuar ${star} estrellas">★</button>`,
+            )
+            .join("")}
+        </div>
         <div class="museo-card-line ${o.line}-line"></div>
       </div>
     `,
@@ -38,9 +177,37 @@
       .join("");
     grid.querySelectorAll(".museo-card").forEach((card) => {
       card.addEventListener("click", (e) => {
-        const i = Number(card.dataset.index);
-        const o = museoObras[i];
-        openModal(o.emoji, o.name, "", "", "");
+        if (e.target.closest("button")) return;
+        const id = card.dataset.id;
+        const o = museoObras.find((item) => item.id === id);
+        if (!o) return;
+        openModal(o);
+      });
+    });
+
+    grid.querySelectorAll("[data-rating-id]").forEach((row) => {
+      row.querySelectorAll(".rating-star").forEach((starButton) => {
+        starButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const id = row.dataset.ratingId;
+          const value = Number(starButton.dataset.ratingValue);
+          const obra = museoObras.find((item) => item.id === id);
+          if (!obra) return;
+          obra.ratingTotal += value;
+          obra.ratingCount += 1;
+          saveMuseo();
+          renderMuseo();
+        });
+      });
+    });
+
+    grid.querySelectorAll("[data-download-id]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const id = button.dataset.downloadId;
+        const obra = museoObras.find((item) => item.id === id);
+        if (!obra) return;
+        downloadArtwork(obra);
       });
     });
   }
@@ -56,7 +223,12 @@
             <h3 id="modal-nombre">Titulo</h3>
             <p id="modal-info">Info</p>
             <p id="modal-fecha" style="margin-top:4px;font-size:12px"></p>
-            <button class="modal-close" id="modal-close">Cerrar</button>
+            <div class="modal-actions">
+              <button class="modal-close modal-download-btn" id="modal-download">
+                Descargar foto
+              </button>
+              <button class="modal-close" id="modal-close">Cerrar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -69,18 +241,46 @@
     document
       .getElementById("modal-close")
       .addEventListener("click", () => overlay.classList.remove("open"));
+    document
+      .getElementById("modal-download")
+      .addEventListener("click", () => downloadArtwork(currentModalArtwork));
   }
 
-  function openModal(emoji, nombre, artista, estilo, fecha) {
+  function openModal(obra) {
     injectModal();
+    currentModalArtwork = obra;
     const overlay = document.getElementById("modal-overlay");
-    document.getElementById("modal-emoji").textContent = emoji || "";
-    document.getElementById("modal-nombre").textContent = nombre || "";
-    document.getElementById("modal-info").textContent = artista
-      ? `Artista: ${artista} · Estilo: ${estilo}`
-      : "";
-    document.getElementById("modal-fecha").textContent = fecha || "";
+    const emojiEl = document.getElementById("modal-emoji");
+    const nombreEl = document.getElementById("modal-nombre");
+    const infoEl = document.getElementById("modal-info");
+    const fechaEl = document.getElementById("modal-fecha");
+    const downloadButton = document.getElementById("modal-download");
+    if (emojiEl) {
+      emojiEl.textContent = obra.photo ? "🖼️" : obra.emoji || "";
+      emojiEl.innerHTML = obra.photo
+        ? `<img src="${obra.photo}" alt="${obra.nombre}" style="width:100%;height:100%;object-fit:cover;" />`
+        : obra.emoji || "";
+    }
+    if (nombreEl) nombreEl.textContent = obra.nombre || "";
+    if (infoEl)
+      infoEl.textContent = `Artista: ${obra.artista || ""} · Estilo: ${obra.estilo || ""}`;
+    if (fechaEl)
+      fechaEl.textContent = `${obra.fecha || ""} · Rating ${formatRating(obra)} (${obra.ratingCount || 0})`;
+    if (downloadButton) downloadButton.disabled = !obra.photo;
     overlay.classList.add("open");
+  }
+
+  function downloadArtwork(obra) {
+    const artwork = obra || currentModalArtwork;
+    if (!artwork) return;
+    if (!artwork.photo) {
+      alert("Esta obra no tiene imagen para descargar.");
+      return;
+    }
+    const link = document.createElement("a");
+    link.href = artwork.photo;
+    link.download = `${(artwork.nombre || "obra").replace(/\s+/g, "_")}.png`;
+    link.click();
   }
 
   function guardarEnMuseo() {
@@ -89,13 +289,29 @@
     const nombre = nombreEl
       ? nombreEl.textContent
       : (JSON.parse(localStorage.getItem(RESULT_KEY)) || {}).nombre;
+    const result = JSON.parse(localStorage.getItem(RESULT_KEY) || "{}");
     const emoji =
       document.getElementById("result-emoji-big")?.textContent ||
-      (JSON.parse(localStorage.getItem(RESULT_KEY)) || {}).emoji ||
+      result.emoji ||
       "🎨";
     const borders = ["gold", "teal"];
     const b = borders[museoObras.length % 2];
-    museoObras.unshift({ emoji, name: nombre || "Obra", border: b, line: b });
+    museoObras.unshift(
+      normalizeObra({
+        id: crypto.randomUUID(),
+        emoji,
+        nombre: nombre || "Obra",
+        artista: result.artista || "Artista",
+        estilo: result.estilo || "Libre",
+        fecha: result.fecha || new Date().toLocaleDateString("es-CO"),
+        createdAt: Date.now(),
+        photo: result.photo || localStorage.getItem(PHOTO_KEY) || "",
+        border: b,
+        line: b,
+        ratingTotal: 0,
+        ratingCount: 0,
+      }),
+    );
     saveMuseo();
     // go to museo
     location.href = "museo.html";
@@ -244,6 +460,8 @@
           nombre: pending.obra || "Obra mágica",
           artista: pending.artista || "Artista",
           estilo: pending.estilo || "Libre",
+          photo: pending.foto || "",
+          createdAt: Date.now(),
           fecha: new Date().toLocaleDateString("es-CO", {
             year: "numeric",
             month: "long",
@@ -264,6 +482,8 @@
       nombre: pending.obra || "Obra",
       artista: pending.artista || "Artista",
       estilo: pending.estilo || "Libre",
+      photo: pending.foto || "",
+      createdAt: Date.now(),
       fecha: new Date().toLocaleDateString("es-CO"),
     };
     localStorage.setItem(RESULT_KEY, JSON.stringify(result));
@@ -283,6 +503,14 @@
     if (elEst) elEst.textContent = res.estilo || "";
     const elFe = document.getElementById("res-fecha");
     if (elFe) elFe.textContent = res.fecha || "";
+    const elFoto = document.getElementById("result-photo");
+    if (elFoto && res.photo) {
+      elFoto.src = res.photo;
+      elFoto.classList.add("show");
+      if (elEmoji) elEmoji.classList.add("is-hidden");
+    } else if (elEmoji) {
+      elEmoji.classList.remove("is-hidden");
+    }
   }
 
   // Install banner + service worker
@@ -360,6 +588,10 @@
           startGeneratingFlow();
         });
       });
+    }
+    const museumSort = document.getElementById("museum-sort");
+    if (museumSort) {
+      museumSort.addEventListener("change", () => renderMuseo());
     }
     // if on IA page, run loading
     if (location.pathname.endsWith("IA.html")) {

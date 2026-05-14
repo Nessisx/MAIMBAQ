@@ -8,6 +8,17 @@
   position: relative;
   margin-bottom: 20px;
 }
+.result-photo {
+  width: 100%;
+  border-radius: var(--radius);
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: none;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.result-photo.show {
+  display: block;
+}
 .result-img {
   width: 100%;
   border-radius: var(--radius);
@@ -19,6 +30,9 @@
   justify-content: center;
   font-size: 120px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+.is-hidden {
+  display: none !important;
 }
 .tu-obra-badge {
   position: absolute;
