@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>MAIMBAQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #F5A623;
+    --orange: #E8860A;
+    --dark: #1A1008;
+    --dark2: #251808;
+    --card: #2E1E0A;
+    --card2: #3A2510;
+    --text: #FFF8EE;
+    --muted: #C9A06A;
+    --green: #4CAF50;
+    --red: #E53935;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark);
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(245,166,35,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(232,134,10,0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(245,166,35,0.08) 0%, transparent 50%);
+    z-index: 0; animation: bgPulse 6s ease-in-out infinite alternate;
+  }
+  @keyframes bgPulse { from{opacity:.7} to{opacity:1} }
+
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute; background: var(--yellow); opacity: 0;
+    clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    animation: floatStar var(--dur) var(--delay) ease-in-out infinite;
+  }
+  @keyframes floatStar {
+    0%,100%{opacity:0;transform:translateY(0) scale(.5)}
+    50%{opacity:.6;transform:translateY(-30px) scale(1)}
+  }
+
+  /* ===== SPLASH ===== */
+  #splash {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: var(--dark);
+  }
+  #splash::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(245,166,35,.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 70%, rgba(232,134,10,.14) 0%, transparent 50%);
+    animation: bgPulse 5s ease-in-out infinite alternate;
+  }
+
+  .floaties { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .floaty {
+    position: absolute; font-size: 22px; opacity: 0;
+    animation: floatyAnim var(--fdur) var(--fdelay) ease-in-out infinite;
+  }
+  @keyframes floatyAnim {
+    0%,100%{opacity:0;transform:translateY(0) rotate(0deg) scale(.8)}
+    50%{opacity:.25;transform:translateY(-40px) rotate(15deg) scale(1.1)}
+  }
+
+  .splash-inner {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 375px;
+    padding: 0 32px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  /* --- Slides --- */
+  .slides-area { width: 100%; text-align: center; }
+  .slide { display: none; flex-direction: column; align-items: center; }
+  .slide.active { display: flex; animation: fadeUp .5s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes fadeUp {
+    from{opacity:0;transform:translateY(28px) scale(.96)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+
+  .slide-icon {
+    width: 110px; height: 110px; border-radius: 36px;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px; margin: 0 auto 24px;
+    box-shadow: 0 0 0 12px rgba(245,166,35,.12), 0 0 0 24px rgba(245,166,35,.06), 0 12px 40px rgba(245,166,35,.45);
+    animation: iconPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes iconPulse {
+    0%,100%{transform:scale(1) rotate(-2deg)}
+    50%{transform:scale(1.06) rotate(2deg)}
+  }
+  .slide-title { font-family:'Fredoka One',cursive; font-size: 28px; color: var(--text); line-height: 1.25; margin-bottom: 10px; }
+  .slide-title em { color: var(--yellow); font-style: normal; }
+  .slide-desc { font-size: 14px; color: var(--muted); line-height: 1.65; font-weight: 600; max-width: 270px; margin: 0 auto; }
+
+  /* Dots */
+  .dots { display: flex; gap: 8px; margin-top: 28px; }
+  .dot { width: 8px; height: 8px; border-radius: 4px; background: rgba(245,166,35,.25); transition: all .35s; cursor: pointer; }
+  .dot.active { background: var(--yellow); width: 24px; box-shadow: 0 0 8px rgba(245,166,35,.5); }
+
+  /* CTA slides */
+  .cta-slides { margin-top: 28px; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+
+  /* --- Step nombre --- */
+  #step-name {
+    display: none; flex-direction: column; align-items: center;
+    text-align: center; width: 100%;
+  }
+  #step-name.show { display: flex; animation: fadeUp .5s cubic-bezier(.22,1,.36,1) both; }
+
+  .name-wave { font-size: 62px; margin-bottom: 18px; display: inline-block; animation: wave 1.4s ease-in-out infinite; transform-origin: 70% 80%; }
+  @keyframes wave {
+    0%,100%{transform:rotate(0deg)}
+    20%{transform:rotate(18deg)}
+    40%{transform:rotate(-10deg)}
+    60%{transform:rotate(14deg)}
+    80%{transform:rotate(-6deg)}
+  }
+
+  .name-title { font-family:'Fredoka One',cursive; font-size: 25px; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+  .name-title em { color: var(--yellow); font-style: normal; }
+  .name-sub { font-size: 13px; color: var(--muted); font-weight: 600; margin-bottom: 26px; }
+
+  .name-field {
+    width: 100%;
+    background: var(--card2);
+    border: 2.5px solid rgba(245,166,35,.25);
+    border-radius: 18px;
+    padding: 15px 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px; color: var(--text);
+    outline: none; text-align: center; letter-spacing: .5px;
+    transition: border-color .2s, box-shadow .2s;
+    -webkit-appearance: none;
+    margin-bottom: 6px;
+  }
+  .name-field::placeholder { color: rgba(201,160,106,.35); }
+  .name-field:focus { border-color: var(--yellow); box-shadow: 0 0 0 4px rgba(245,166,35,.15); }
+
+  .name-err { font-size: 12px; color: var(--red); font-weight: 700; height: 16px; margin-bottom: 20px; }
+
+  .cta-name { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+
+  .divider-or {
+    display: flex; align-items: center; gap: 10px; width: 100%; margin: 2px 0;
+  }
+  .divider-or::before, .divider-or::after { content:''; flex:1; height:1px; background: rgba(245,166,35,.15); }
+  .divider-or span { font-size: 11px; color: rgba(201,160,106,.45); font-weight: 700; white-space: nowrap; }
+
+  /* Buttons */
+  .btn-go {
+    width: 100%; max-width: 270px;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    border: none; border-radius: 50px;
+    font-family: 'Fredoka One', cursive; font-size: 19px; color: #1A1008;
+    cursor: pointer; box-shadow: 0 6px 28px rgba(245,166,35,.5);
+    transition: transform .18s, box-shadow .18s;
+    position: relative; overflow: hidden;
+  }
+  .btn-go::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.28),transparent); opacity:0; transition:opacity .2s; }
+  .btn-go:hover::after { opacity:1; }
+  .btn-go:active { transform:scale(.96); box-shadow:0 3px 14px rgba(245,166,35,.3); }
+
+  .btn-next {
+    width: 100%; max-width: 220px;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    border: none; border-radius: 50px;
+    font-family: 'Fredoka One', cursive; font-size: 18px; color: #1A1008;
+    cursor: pointer; box-shadow: 0 6px 24px rgba(245,166,35,.45);
+    transition: transform .18s; position: relative; overflow: hidden;
+  }
+  .btn-next::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.28),transparent); opacity:0; transition:opacity .2s; }
+  .btn-next:hover::after { opacity:1; }
+  .btn-next:active { transform:scale(.96); }
+
+  .btn-ghost {
+    background: none; border: none;
+    font-size: 13px; color: var(--muted);
+    font-family: 'Nunito', sans-serif; font-weight: 700;
+    cursor: pointer; padding: 6px 16px; border-radius: 20px;
+    transition: color .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { color: var(--yellow); }
+  .btn-ghost strong { color: var(--yellow); }
+
+  /* exit */
+  .splash-exit { animation: splashOut .5s cubic-bezier(.55,0,1,.45) forwards !important; }
+  @keyframes splashOut { from{opacity:1;transform:scale(1)} to{opacity:0;transform:scale(1.06)} }
+
+  /* Toast */
+  .toast {
+    position: fixed; top: 60px; left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: var(--card2); border: 1px solid rgba(245,166,35,.3);
+    border-radius: 12px; padding: 12px 20px;
+    font-size: 13px; font-weight: 700; color: var(--text);
+    z-index: 99999; opacity: 0; transition: all .3s ease;
+    white-space: nowrap; pointer-events: none;
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .toast.ok { border-color: var(--green); color: #81C784; }
+  .toast.err { border-color: var(--red); color: #EF9A9A; }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="toast" id="toast"></div>
+
+<div id="splash">
+  <div class="floaties" id="floaties"></div>
+
+  <div class="splash-inner">
+
+    <!-- ONBOARDING -->
+    <div class="slides-area" id="slides-area">
+      <div class="slide active" id="slide-0">
+        <div class="slide-icon">🎨</div>
+        <div class="slide-title">¡Bienvenido a<br><em>MAIMBAQ!</em></div>
+        <p class="slide-desc">El museo digital donde los pequeños artistas convierten sus dibujos en obras maestras.</p>
+      </div>
+      <div class="slide" id="slide-1">
+        <div class="slide-icon" style="background:linear-gradient(135deg,#7C3AED,#4F46E5);">📸</div>
+        <div class="slide-title">Sube tu<br><em>dibujo</em> favorito</div>
+        <p class="slide-desc">Toma una foto de tu obra, súbela y deja que la magia digital haga el resto.</p>
+      </div>
+      <div class="slide" id="slide-2">
+        <div class="slide-icon" style="background:linear-gradient(135deg,#10B981,#047857);">🏛️</div>
+        <div class="slide-title">Tu arte en el<br><em>museo</em> ✨</div>
+        <p class="slide-desc">Comparte tus creaciones y descubre el arte increíble de otros artistas.</p>
+      </div>
+    </div>
+
+    <div class="dots" id="dots">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+    </div>
+
+    <div class="cta-slides" id="cta-slides">
+      <button class="btn-next" id="btn-next" onclick="nextSlide()">Siguiente →</button>
+      <button class="btn-ghost" onclick="goToName()">Saltar intro</button>
+    </div>
+
+    <!-- PASO NOMBRE -->
+    <div id="step-name">
+      <div class="name-wave">👋</div>
+      <div class="name-title">¿Cómo te llamas,<br><em>pequeño artista?</em></div>
+      <p class="name-sub">Solo tu nombre, ¡nada más!</p>
+
+      <input class="name-field" id="nombre" type="text"
+             placeholder="Escribe tu nombre..." maxlength="20"
+             oninput="document.getElementById('name-err').textContent=''"
+             onkeydown="if(event.key==='Enter') entrar()">
+      <div class="name-err" id="name-err"></div>
+
+      <div class="cta-name">
+        <button class="btn-go" onclick="entrar()">¡Entrar a jugar! 🚀</button>
+
+        <div class="divider-or"><span>— o si ya tienes cuenta —</span></div>
+
+        <a class="btn-ghost" href="register.html">¿Tienes cuenta? <strong>Inicia sesión</strong></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 12; i++) {
+    const s = document.createElement('div'); s.className = 'star';
+    const sz = 4 + Math.random() * 6;
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--dur:${3+Math.random()*4}s;--delay:${Math.random()*4}s`;
+    starsEl.appendChild(s);
+  }
+
+  // Floaties
+  ['🎨','✏️','🖌️','⭐','🌟','🎭','🌈','🖼️','💫','✨','🎠','🎪'].forEach(e => {
+    const el = document.createElement('div'); el.className = 'floaty'; el.textContent = e;
+    el.style.cssText = `left:${5+Math.random()*90}%;top:${5+Math.random()*90}%;--fdur:${4+Math.random()*5}s;--fdelay:${Math.random()*5}s`;
+    document.getElementById('floaties').appendChild(el);
+  });
+
+  // Toast
+  function toast(msg, type='') {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = `toast ${type} show`;
+    setTimeout(() => t.className = 'toast', 2500);
+  }
+
+  // Slides
+  let cur = 0;
+  function goSlide(n) {
+    document.getElementById(`slide-${cur}`).classList.remove('active');
+    cur = n;
+    const s = document.getElementById(`slide-${cur}`);
+    s.style.animation = 'none'; s.offsetHeight; s.style.animation = '';
+    s.classList.add('active');
+    document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+    document.getElementById('btn-next').textContent = cur === 2 ? '¡Vamos! 🎉' : 'Siguiente →';
+  }
+  function nextSlide() { cur < 2 ? goSlide(cur+1) : goToName(); }
+
+  // Mostrar paso nombre
+  function goToName() {
+    document.getElementById('slides-area').style.display = 'none';
+    document.getElementById('dots').style.display = 'none';
+    document.getElementById('cta-slides').style.display = 'none';
+    document.getElementById('step-name').classList.add('show');
+    setTimeout(() => document.getElementById('nombre').focus(), 350);
+  }
+
+  // Entrar a la app
+  function entrar() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const errEl  = document.getElementById('name-err');
+    if (!nombre) { errEl.textContent = '¡Escribe tu nombre para entrar! 😊'; document.getElementById('nombre').focus(); return; }
+    errEl.textContent = '';
+
+    sessionStorage.setItem('maimbaq_user', JSON.stringify({ name: nombre, guest: true }));
+    toast(`¡Hola, ${nombre}! 🎨`, 'ok');
+
+    setTimeout(() => {
+      document.getElementById('splash').classList.add('splash-exit');
+      setTimeout(() => window.location.href = 'index.html', 520);
+    }, 700);
+  }
+
+  // Auto-skip si ya hay sesión
+  if (sessionStorage.getItem('maimbaq_user')) window.location.href = 'index.html';
+</script>
+</body>
+</html>
