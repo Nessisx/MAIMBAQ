@@ -1,20 +1,20 @@
 const CACHE_VERSION = "maimbaq-v1";
 const CORE_ASSETS = [
-  "/",
-  "/index.html",
-  "/manifest.json",
-  "/icon-192.png",
-  "/icon-512.png",
-  "/frontend/public/index.html",
-  "/frontend/src/css/base.css",
-  "/frontend/src/css/crear.css",
-  "/frontend/src/js/app.js",
-  "/pages/crear.html",
-  "/pages/dashboard.html",
-  "/pages/museo.html",
-  "/pages/sobre.html",
-  "/pages/IA.html",
-  "/pages/resultado.html",
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./frontend/public/index.html",
+  "./frontend/src/css/base.css",
+  "./frontend/src/css/crear.css",
+  "./frontend/src/js/app.js",
+  "./pages/crear.html",
+  "./pages/dashboard.html",
+  "./pages/museo.html",
+  "./pages/sobre.html",
+  "./pages/IA.html",
+  "./pages/resultado.html",
 ];
 
 self.addEventListener("install", (event) => {
@@ -61,7 +61,7 @@ self.addEventListener("fetch", (event) => {
           return networkResponse;
         })
         .catch(() =>
-          caches.match("/frontend/public/index.html").then((fallback) => {
+          caches.match("./frontend/public/index.html").then((fallback) => {
             return fallback || new Response("Offline", { status: 503 });
           }),
         );

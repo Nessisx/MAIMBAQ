@@ -98,14 +98,14 @@
     museoObras.unshift({ emoji, name: nombre || "Obra", border: b, line: b });
     saveMuseo();
     // go to museo
-    location.href = "/pages/museo.html";
+    location.href = "museo.html";
   }
 
   // expose some functions globally for inline handlers
   window.openModal = openModal;
   window.guardarEnMuseo = guardarEnMuseo;
   window.navTo = (id) => {
-    location.href = "/pages/" + id + ".html";
+    location.href = id + ".html";
   };
 
   // Generation flow: datos -> carga -> resultado
@@ -127,7 +127,7 @@
       PENDING_KEY,
       JSON.stringify({ obra, artista, estilo, foto }),
     );
-    location.href = "/pages/IA.html";
+    location.href = "IA.html";
   }
   window.startGenerating = startGeneratingFlow;
 
@@ -227,7 +227,7 @@
           }),
         };
         localStorage.setItem(RESULT_KEY, JSON.stringify(result));
-        location.href = "/pages/resultado.html";
+        location.href = "resultado.html";
       }, 400);
     }, 3500);
   }
@@ -243,7 +243,7 @@
       fecha: new Date().toLocaleDateString("es-CO"),
     };
     localStorage.setItem(RESULT_KEY, JSON.stringify(result));
-    location.href = "/pages/resultado.html";
+    location.href = "resultado.html";
   }
 
   function populateResultado() {
@@ -323,7 +323,7 @@
     const logo = document.querySelector(".logo");
     if (logo) {
       logo.addEventListener("click", () => {
-        location.href = "/";
+        location.href = "../index.html";
       });
     }
 
@@ -431,7 +431,7 @@
   });
 
   if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-    const swUrl = "/sw.js";
+    const swUrl = "../sw.js";
 
     // Register in both local and production HTTP(S) environments.
     fetch(swUrl, { method: "HEAD" })
