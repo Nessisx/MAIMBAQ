@@ -4,6 +4,7 @@
   const PENDING_KEY = "mambaq_pending";
   const RESULT_KEY = "mambaq_result";
   const PHOTO_KEY = "mambaq_photo_dataurl";
+  const INSTALL_BANNER_DISMISSED_KEY = "mambaq_install_banner_dismissed_v1";
 
   const defaultObras = () => [
     { emoji: "🐘", name: "Party Elephant", border: "gold", line: "gold" },
@@ -262,7 +263,16 @@
 
   // Install banner + service worker
   let deferredPrompt = null;
+  function wasInstallBannerDismissed() {
+    return localStorage.getItem(INSTALL_BANNER_DISMISSED_KEY) === "1";
+  }
+
+  function rememberInstallBannerDismissed() {
+    localStorage.setItem(INSTALL_BANNER_DISMISSED_KEY, "1");
+  }
+
   function injectInstallBanner() {
+    if (wasInstallBannerDismissed()) return;
     if (document.getElementById("install-banner")) return;
     const div = document.createElement("div");
     div.innerHTML = `
@@ -278,7 +288,7 @@
     document.body.appendChild(div.firstElementChild);
     document
       .getElementById("install-no")
-      .addEventListener("click", dismissInstall);
+      .addEventListener("click", () => dismissInstall({ remember: true }));
     document.getElementById("install-yes").addEventListener("click", doInstall);
   }
 
@@ -290,7 +300,11 @@
       dismissInstall();
     });
   }
-  function dismissInstall() {
+  function dismissInstall(options) {
+    const remember = !!options?.remember;
+    if (remember) {
+      rememberInstallBannerDismissed();
+    }
     const b = document.getElementById("install-banner");
     if (b) b.classList.remove("show");
   }
@@ -408,6 +422,7 @@
 
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
+    if (wasInstallBannerDismissed()) return;
     deferredPrompt = e;
     setTimeout(() => {
       const b = document.getElementById("install-banner");
@@ -415,39 +430,17 @@
     }, 1000);
   });
 
-  if ("serviceWorker" in navigator) {
-    const host = location.hostname;
-    const isPrivateIpv4 =
-      /^(10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[0-1])\.)/.test(host);
-    const isLocalhost =
-      host === "localhost" ||
-      host === "127.0.0.1" ||
-      host === "::1" ||
-      host === "" ||
-      isPrivateIpv4 ||
-      location.protocol === "file:";
-    if (isLocalhost) {
-      // On local dev — unregister any existing service workers and clear caches
-      try {
-        navigator.serviceWorker.getRegistrations().then((regs) => {
-          regs.forEach((r) => r.unregister().catch(() => {}));
-        });
-      } catch (e) {}
-      if (window.caches) {
-        try {
-          caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
-        } catch (e) {}
-      }
-    } else if (location.protocol.startsWith("http")) {
-      // Only register if a service worker file actually exists.
-      fetch("../sw.js", { method: "HEAD" })
-        .then((res) => {
-          if (res.ok) {
-            return navigator.serviceWorker.register("../sw.js");
-          }
-          return null;
-        })
-        .catch(() => {});
-    }
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    const swUrl = "/sw.js";
+
+    // Register in both local and production HTTP(S) environments.
+    fetch(swUrl, { method: "HEAD" })
+      .then((res) => {
+        if (res.ok) {
+          return navigator.serviceWorker.register(swUrl);
+        }
+        return null;
+      })
+      .catch(() => {});
   }
 })();

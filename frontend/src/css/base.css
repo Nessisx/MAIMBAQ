@@ -246,6 +246,72 @@ body {
 }
 .install-banner.show {
   display: flex;
+  animation: slideUp 0.28s ease-out;
+}
+
+.install-banner-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.install-banner-row p {
+  margin: 0;
+  font-family: "Fredoka", sans-serif;
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.install-banner small {
+  display: block;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.install-btn-no {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.install-btn-no:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.install-btn-yes {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d2428;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.install-btn-yes:hover {
+  background: #f2f2f2;
+}
+
+.install-btn-yes:active,
+.install-btn-no:active {
+  transform: translateY(1px);
 }
 
 @keyframes slideUp {
@@ -291,5 +357,8 @@ body {
   }
   .nav-item {
     padding: 6px 10px;
+  }
+  .install-banner-row p {
+    font-size: 20px;
   }
 }
