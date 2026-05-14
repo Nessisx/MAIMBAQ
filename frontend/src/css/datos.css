@@ -17,6 +17,14 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   min-height: 180px;
 }
+.photo-actions {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
 .datos-art-preview .art-emoji {
   font-size: 90px;
 }
@@ -32,12 +40,10 @@
   display: block;
 }
 .datos-art-preview .edit-float {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
+  position: relative;
   background: var(--gold);
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -47,6 +53,12 @@
   border: none;
   cursor: pointer;
   z-index: 2;
+}
+.datos-art-preview .edit-float-camera {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+.datos-art-preview .edit-float-gallery {
+  background: var(--teal);
 }
 .datos-art-preview .foto-input {
   display: none;
@@ -132,11 +144,40 @@
   z-index: 2;
 }
 
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--teal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-right: 0;
+  flex-shrink: 0;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+.back-btn:hover,
+.back-btn:focus-visible {
+  transform: translateY(-50%) translateX(-1px);
+}
+
 /* Ensure button isn't overlapped by bottom nav on small screens */
 @media (max-width: 520px) {
-  .datos-art-preview .edit-float {
-    bottom: 10px;
+  .photo-actions {
     right: 10px;
+    bottom: 10px;
+  }
+
+  .datos-art-preview .edit-float {
     width: 40px;
     height: 40px;
   }

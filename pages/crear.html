@@ -19,6 +19,12 @@
   <body>
     <header class="header">
       <div class="header-inner">
+        <a
+          class="back-btn"
+          href="dashboard.html"
+          aria-label="Volver al dashboard"
+          >←</a
+        >
         <div class="avatar">🧒</div>
         <div class="logo">
           <span class="ma">M</span><span class="im">AI</span
@@ -39,24 +45,41 @@
               alt="Vista previa del dibujo"
             />
             <div id="preview-placeholder" class="art-emoji">🎨</div>
-            <button
-              id="btn-captura"
-              class="edit-float"
-              type="button"
-              aria-label="Tomar o seleccionar foto"
-            >
-              📷
-            </button>
+            <div class="photo-actions">
+              <button
+                id="btn-captura"
+                class="edit-float edit-float-camera"
+                type="button"
+                aria-label="Tomar una foto"
+              >
+                📷
+              </button>
+              <button
+                id="btn-galeria"
+                class="edit-float edit-float-gallery"
+                type="button"
+                aria-label="Elegir una imagen"
+              >
+                🖼️
+              </button>
+            </div>
             <input
-              id="input-foto"
+              id="input-foto-camara"
               class="foto-input"
               type="file"
               accept="image/*"
               capture="environment"
             />
+            <input
+              id="input-foto-galeria"
+              class="foto-input"
+              type="file"
+              accept="image/*"
+            />
           </div>
           <p id="foto-status" class="foto-status">
-            Toca la camara para tomar una foto de tu dibujo.
+            Toca la cámara para tomar una foto o usa la galería para subir una
+            imagen.
           </p>
 
           <div class="datos-title">Hora de crear<br />arte!</div>

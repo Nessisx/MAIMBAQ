@@ -132,25 +132,38 @@
   window.startGenerating = startGeneratingFlow;
 
   function initPhotoCapture() {
-    const input = document.getElementById("input-foto");
-    const trigger = document.getElementById("btn-captura");
+    const cameraInput = document.getElementById("input-foto-camara");
+    const galleryInput = document.getElementById("input-foto-galeria");
+    const cameraTrigger = document.getElementById("btn-captura");
+    const galleryTrigger = document.getElementById("btn-galeria");
     const preview = document.getElementById("preview-foto");
     const placeholder = document.getElementById("preview-placeholder");
     const status = document.getElementById("foto-status");
 
-    if (!input || !trigger || !preview) return;
+    if (
+      !cameraInput ||
+      !galleryInput ||
+      !cameraTrigger ||
+      !galleryTrigger ||
+      !preview
+    )
+      return;
 
-    const updatePreview = (dataUrl) => {
+    const updatePreview = (dataUrl, sourceLabel) => {
       preview.src = dataUrl;
       preview.classList.add("show");
       if (placeholder) placeholder.classList.add("is-hidden");
-      if (status) status.textContent = "Foto cargada. Ya puedes continuar.";
+      if (status) {
+        status.textContent = sourceLabel
+          ? `${sourceLabel} agregada. Ya puedes continuar.`
+          : "Imagen cargada. Ya puedes continuar.";
+      }
     };
 
     const savedPhoto = localStorage.getItem(PHOTO_KEY);
-    if (savedPhoto) updatePreview(savedPhoto);
+    if (savedPhoto) updatePreview(savedPhoto, "Imagen anterior");
 
-    const requestPermissionAndOpenPicker = async () => {
+    const openCameraPicker = async () => {
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({
@@ -161,12 +174,17 @@
           // Continue with file picker if direct camera permission fails.
         }
       }
-      input.click();
+      cameraInput.click();
     };
 
-    trigger.addEventListener("click", requestPermissionAndOpenPicker);
+    const openGalleryPicker = () => {
+      galleryInput.click();
+    };
 
-    input.addEventListener("change", () => {
+    cameraTrigger.addEventListener("click", openCameraPicker);
+    galleryTrigger.addEventListener("click", openGalleryPicker);
+
+    const handleFileChange = (input, sourceLabel) => {
       const file = input.files && input.files[0];
       if (!file) return;
 
@@ -181,11 +199,19 @@
         const result = reader.result;
         if (typeof result === "string") {
           localStorage.setItem(PHOTO_KEY, result);
-          updatePreview(result);
+          updatePreview(result, sourceLabel);
         }
       };
       reader.readAsDataURL(file);
-    });
+      input.value = "";
+    };
+
+    cameraInput.addEventListener("change", () =>
+      handleFileChange(cameraInput, "Foto tomada"),
+    );
+    galleryInput.addEventListener("change", () =>
+      handleFileChange(galleryInput, "Imagen elegida"),
+    );
   }
 
   function runLoadingAndProduce() {

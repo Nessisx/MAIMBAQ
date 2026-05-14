@@ -59,6 +59,7 @@ body {
   height: var(--header-h);
   max-width: 920px;
   margin: 0 auto;
+  position: relative;
 }
 .avatar {
   width: 40px;
