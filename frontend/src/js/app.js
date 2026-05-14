@@ -305,7 +305,7 @@
           <p>¡Instala MAIMBAQ!</p>
           <button class="install-btn-no" id="install-no">✕</button>
         </div>
-        <small>Agrega la app a tu pantalla de inicio para usarla sin internet</small>
+        <small>Agrega la app a tu pantalla de inicio para usarla en cualquier momento</small>
         <button class="install-btn-yes" id="install-yes">Instalar ahora</button>
       </div>
     `;
