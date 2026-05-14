@@ -110,12 +110,6 @@
 
   // Generation flow: datos -> carga -> resultado
   function startGeneratingFlow() {
-    const needsPhoto = document.getElementById("input-foto");
-    if (needsPhoto && !localStorage.getItem(PHOTO_KEY)) {
-      alert("Primero toma o selecciona una foto de tu dibujo.");
-      return;
-    }
-
     const obra =
       document.getElementById("input-obra")?.value.trim() || "Obra mágica";
     const artista =
@@ -123,6 +117,9 @@
     const estilo =
       document.getElementById("input-estilo")?.value.trim() || "Libre";
     const foto = localStorage.getItem(PHOTO_KEY) || "";
+    if (!foto) {
+      localStorage.removeItem(PHOTO_KEY);
+    }
     localStorage.setItem(
       PENDING_KEY,
       JSON.stringify({ obra, artista, estilo, foto }),
