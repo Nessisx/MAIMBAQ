@@ -98,14 +98,14 @@
     museoObras.unshift({ emoji, name: nombre || "Obra", border: b, line: b });
     saveMuseo();
     // go to museo
-    location.href = "museo.html";
+    location.href = "/pages/museo.html";
   }
 
   // expose some functions globally for inline handlers
   window.openModal = openModal;
   window.guardarEnMuseo = guardarEnMuseo;
   window.navTo = (id) => {
-    location.href = id + ".html";
+    location.href = "/pages/" + id + ".html";
   };
 
   // Generation flow: datos -> carga -> resultado
@@ -127,7 +127,7 @@
       PENDING_KEY,
       JSON.stringify({ obra, artista, estilo, foto }),
     );
-    location.href = "IA.html";
+    location.href = "/pages/IA.html";
   }
   window.startGenerating = startGeneratingFlow;
 
@@ -227,7 +227,7 @@
           }),
         };
         localStorage.setItem(RESULT_KEY, JSON.stringify(result));
-        location.href = "resultado.html";
+        location.href = "/pages/resultado.html";
       }, 400);
     }, 3500);
   }
@@ -243,7 +243,7 @@
       fecha: new Date().toLocaleDateString("es-CO"),
     };
     localStorage.setItem(RESULT_KEY, JSON.stringify(result));
-    location.href = "resultado.html";
+    location.href = "/pages/resultado.html";
   }
 
   function populateResultado() {
@@ -323,7 +323,7 @@
     const logo = document.querySelector(".logo");
     if (logo) {
       logo.addEventListener("click", () => {
-        location.href = "index.html";
+        location.href = "/";
       });
     }
 

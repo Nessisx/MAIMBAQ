@@ -10,6 +10,7 @@ const CORE_ASSETS = [
   "/frontend/src/css/crear.css",
   "/frontend/src/js/app.js",
   "/pages/crear.html",
+  "/pages/dashboard.html",
   "/pages/museo.html",
   "/pages/sobre.html",
   "/pages/IA.html",
