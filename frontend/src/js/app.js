@@ -278,7 +278,7 @@
     div.innerHTML = `
       <div class="install-banner" id="install-banner">
         <div class="install-banner-row">
-          <p>📲 ¡Instala MAIMBAQ!</p>
+          <p>¡Instala MAIMBAQ!</p>
           <button class="install-btn-no" id="install-no">✕</button>
         </div>
         <small>Agrega la app a tu pantalla de inicio para usarla sin internet</small>
