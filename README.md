@@ -56,7 +56,7 @@ La app rinde homenaje a **Álvaro Cepeda Samudio**, destacado escritor y periodi
 
 ## ✨ Características
 
-### Implementadas ✅
+### Implementadas 
 - 🎬 **Onboarding animado** — 3 slides de bienvenida antes de entrar
 - 👋 **Acceso sin registro** — Solo pide el nombre del artista, sin contraseña
 - 🔐 **Login / Registro opcionales** — Para usuarios con cuenta guardada
@@ -69,7 +69,7 @@ La app rinde homenaje a **Álvaro Cepeda Samudio**, destacado escritor y periodi
 - 📱 **PWA** — Instalable en dispositivo móvil (`manifest.json` + `sw.js`)
 - 🌐 **Deploy en GitHub Pages** — Frontend disponible públicamente
 
-### Backend ✅
+### Backend 
 - API REST con Node.js + Express + MongoDB
 - Endpoints CRUD para obras de arte
 - Health check endpoint
@@ -396,7 +396,7 @@ Bottom nav fija con 3 secciones:
 
 ## 🗺 Roadmap
 
-### v0.1 — Base ✅
+### v0.1 — Base 
 - [x] Onboarding de 3 slides animados
 - [x] Acceso como invitado (solo nombre)
 - [x] Login / registro opcionales
