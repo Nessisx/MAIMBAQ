@@ -384,7 +384,7 @@
         valid: false,
         code: "blacklisted",
         reason:
-          "Ese nombre no está permitido para una app infantil. Prueba otro más amigable.",
+          "Ese nombre no está permitido en esta app. Prueba otro más amigable.",
         normalized,
         matchedWord,
       };
