@@ -1,11 +1,10 @@
-const CACHE_VERSION = "maimbaq-v1";
+const CACHE_VERSION = "maimbaq-v2";
 const CORE_ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
   "./frontend/src/assets/icons/icon-192.png",
   "./frontend/src/assets/icons/icon-512.png",
-  "./frontend/public/index.html",
   "./frontend/src/css/base.css",
   "./frontend/src/css/crear.css",
   "./frontend/src/js/app.js",
@@ -62,7 +61,7 @@ self.addEventListener("fetch", (event) => {
           return networkResponse;
         })
         .catch(() =>
-          caches.match("./frontend/public/index.html").then((fallback) => {
+          caches.match("./index.html").then((fallback) => {
             return fallback || new Response("Offline", { status: 503 });
           }),
         );

@@ -4,7 +4,7 @@ Este documento resume los requisitos del proyecto MAIMBAQ de forma clara y separ
 
 ## Funcionales
 
-- Mostrar la página principal del proyecto desde `frontend/public/index.html`.
+- Mostrar la página principal del proyecto desde `index.html`.
 - Permitir navegar entre las pantallas de creación, carga, resultado, museo y sobre nosotros.
 - Capturar o seleccionar una imagen del dibujo del usuario.
 - Simular o ejecutar el flujo de generación de la obra.
@@ -16,7 +16,7 @@ Este documento resume los requisitos del proyecto MAIMBAQ de forma clara y separ
 
 - Usar Node.js con Express para el backend.
 - Conectar el backend con MongoDB mediante Mongoose.
-- Mantener una plantilla de variables de entorno en `backend/test/.env`.
+- Mantener una plantilla local de configuración separada del código.
 - Evitar subir credenciales reales al repositorio.
 - Servir el frontend localmente desde el backend para pruebas.
 - Mantener rutas absolutas para navegación y assets cuando se ejecute en local.
@@ -31,7 +31,7 @@ Este documento resume los requisitos del proyecto MAIMBAQ de forma clara y separ
 
 - [backend/src/app.js](../../backend/src/app.js)
 - [backend/src/routes/artwork.routes.js](../../backend/src/routes/artwork.routes.js)
-- [frontend/public/index.html](../../frontend/public/index.html)
+- [index.html](../../index.html)
 - [pages/crear.html](../../pages/crear.html)
 - [pages/museo.html](../../pages/museo.html)
 - [pages/sobre.html](../../pages/sobre.html)

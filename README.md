@@ -4,7 +4,7 @@ Aplicación web creativa para convertir dibujos en experiencias digitales, con u
 
 ## Estructura
 
-- `frontend/public/`: página de inicio servida por el backend en local.
+- `index.html`: página de inicio servida por el backend en local.
 - `frontend/src/`: estilos, scripts e imágenes compartidas.
 - `pages/`: pantallas secundarias del proyecto.
 - `backend/`: API en Node.js, Express y Mongoose.
@@ -27,9 +27,10 @@ Consulta los endpoints del backend en [docs/api/README.md](docs/api/README.md).
 3. Ejecuta `npm run dev`.
 4. Abre `http://localhost:5000`.
 
-### Variables de entorno
+### Configuración local
 
-- Revisa la plantilla en [backend/test/.env](backend/test/.env).
+- Usa una plantilla de configuración local con las claves necesarias para tu entorno.
+- Completa los valores reales solo en tu máquina.
 - No subas credenciales reales al repositorio.
 
 ## Rutas principales

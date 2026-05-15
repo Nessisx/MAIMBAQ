@@ -50,7 +50,7 @@ app.use('/frontend', express.static(frontendRoot));
 app.use('/pages', express.static(pagesRoot));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(frontendRoot, 'public', 'index.html'));
+  res.sendFile(path.join(projectRoot, 'index.html'));
 });
 
 app.use('/api', apiRoutes);

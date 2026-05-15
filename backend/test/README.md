@@ -1,15 +1,15 @@
-# Variables de entorno
+# Configuración local
 
-Este archivo contiene una plantilla local para el backend.
+Esta carpeta puede alojar una plantilla de configuración para ejecutar el backend en desarrollo.
 
-## Reemplaza estos valores
+## Valores sugeridos
 
-- `MONGODB_URI`: pega tu cadena real de MongoDB Atlas o tu servidor MongoDB.
-- `MONGODB_DB_NAME`: nombre de la base de datos que vas a usar.
+- `MONGODB_URI`: cadena de MongoDB Atlas o instancia local.
+- `MONGODB_DB_NAME`: nombre de la base de datos.
 - `CLIENT_ORIGIN`: origen permitido para el frontend en desarrollo o producción.
 
 ## Uso
 
-1. Copia o ajusta los valores de `backend/test/.env`.
-2. Si prefieres otro archivo local, puedes moverlo a `backend/.env`.
-3. No subas credenciales reales al repositorio.
+1. Crea o ajusta una plantilla local con los valores que necesitas.
+2. Mantén las credenciales reales solo en tu máquina.
+3. No subas secretos al repositorio.
