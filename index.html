@@ -616,7 +616,7 @@
             oninput="document.getElementById('name-err').textContent = ''"
             onkeydown="if (event.key === 'Enter') entrar();"
           />
-          <div class="name-err" id="name-err"></div>
+          <div class="name-err" id="name-err" role="alert" aria-live="polite"></div>
 
           <div class="cta-name">
             <button class="btn-go" onclick="entrar()">
@@ -633,6 +633,7 @@
       </div>
     </div>
 
+    <script src="frontend/src/js/usernameModeration.js"></script>
     <script>
       // Stars
       const starsEl = document.getElementById("stars");
@@ -707,11 +708,32 @@
       function entrar() {
         const nombre = document.getElementById("nombre").value.trim();
         const errEl = document.getElementById("name-err");
+        const validator = window.UsernameModeration;
+
+        if (!validator) {
+          errEl.textContent = "No se pudo cargar la validación. Recarga la página.";
+          document.getElementById("nombre").focus();
+          return;
+        }
+
         if (!nombre) {
           errEl.textContent = "¡Escribe tu nombre para entrar! 😊";
           document.getElementById("nombre").focus();
           return;
         }
+
+        const validation = validator.validateUsername(nombre, {
+          minLength: 3,
+          maxLength: 20,
+          blacklist: validator.DEFAULT_BLACKLIST,
+        });
+
+        if (!validation.valid) {
+          errEl.textContent = validation.reason;
+          document.getElementById("nombre").focus();
+          return;
+        }
+
         errEl.textContent = "";
 
         sessionStorage.setItem(

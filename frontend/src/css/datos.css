@@ -126,6 +126,15 @@
   color: #bbb;
 }
 
+.field-err {
+  min-height: 18px;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--red);
+}
+
 .vamos-btn {
   display: inline-block;
   text-decoration: none;

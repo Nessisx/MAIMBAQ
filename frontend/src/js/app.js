@@ -329,17 +329,45 @@
     dismissInstall();
     const obra =
       document.getElementById("input-obra")?.value.trim() || "Obra mágica";
-    const artista =
-      document.getElementById("input-artista")?.value.trim() || "Artista";
+    const artistaInput = document.getElementById("input-artista");
+    const artistaError = document.getElementById("artista-err");
+    const artista = artistaInput?.value.trim() || "";
+    const validator = window.UsernameModeration;
+
+    if (!validator) {
+      if (artistaError) {
+        artistaError.textContent = "No se pudo cargar la validación del nombre.";
+      }
+      artistaInput?.focus();
+      return;
+    }
+
+    const artistValidation = validator.validateUsername(artista, {
+      minLength: 3,
+      maxLength: 20,
+      blacklist: validator.DEFAULT_BLACKLIST,
+    });
+
+    if (!artistValidation.valid) {
+      if (artistaError) {
+        artistaError.textContent = artistValidation.reason;
+      }
+      artistaInput?.focus();
+      return;
+    }
+
     const estilo =
       document.getElementById("input-estilo")?.value.trim() || "Libre";
     const foto = localStorage.getItem(PHOTO_KEY) || "";
     if (!foto) {
       localStorage.removeItem(PHOTO_KEY);
     }
+    if (artistaError) {
+      artistaError.textContent = "";
+    }
     localStorage.setItem(
       PENDING_KEY,
-      JSON.stringify({ obra, artista, estilo, foto }),
+      JSON.stringify({ obra, artista: artistValidation.value, estilo, foto }),
     );
     location.href = "IA.html";
   }
