@@ -4,7 +4,6 @@ Este documento resume los requisitos del proyecto MAIMBAQ de forma clara y separ
 
 ## Funcionales
 
-- Mostrar la página principal del proyecto desde `index.html`.
 - Permitir navegar entre las pantallas de creación, carga, resultado, museo y sobre nosotros.
 - Capturar o seleccionar una imagen del dibujo del usuario.
 - Simular o ejecutar el flujo de generación de la obra.

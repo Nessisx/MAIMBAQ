@@ -31,7 +31,6 @@ Consulta los endpoints del backend en [docs/api/README.md](docs/api/README.md).
 
 - Usa una plantilla de configuración local con las claves necesarias para tu entorno.
 - Completa los valores reales solo en tu máquina.
-- No subas credenciales reales al repositorio.
 
 ## Rutas principales
 
