@@ -1,22 +1,36 @@
 # MAIMBAQ
 
-Aplicación web interactiva que transforma dibujos en experiencias digitales y los presenta en un museo virtual. MAIMBAQ combina una interfaz móvil-first con un backend en Node.js + MongoDB.
+[![HTML5](https://img.shields.io/badge/HTML5-E34C26?style=flat&logo=html5&logoColor=white)](https://html.spec.whatwg.org/)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
+[![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=flat&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Aplicación web interactiva que transforma dibujos en experiencias digitales y los presenta en un museo virtual. MAIMBAQ combina una interfaz móvil-first con un backend en Node.js + MongoDB, integrando IA para análisis de poses con MediaPipe y TensorFlow.
 
 ## Qué incluye
 
 - `index.html`: entrada principal con onboarding y acceso por nombre.
 - `pages/`: pantallas secundarias (`dashboard`, `crear`, `IA`, `resultado`, `museo`, `sobre`).
 - `frontend/src/`: recursos compartidos de la app (CSS, JS, assets).
+  - `apps/poseai/`: aplicación integrada de análisis de poses con IA
 - `backend/`: API REST con Express, Mongoose y conexión a MongoDB.
 - `docs/`: documentación de la API y los requisitos del proyecto.
 
 ## Características clave
 
-- Conversión de dibujos en obras digitales.
-- Museo interactivo con galería de obras.
-- Flujo de usuario simple: crear → procesar → ver resultado.
-- PWA básica con `manifest.json` y `sw.js`.
-- Backend con CRUD de obras en `/api/artworks`.
+- 🎨 Conversión de dibujos en obras digitales.
+- 🏛️ Museo interactivo con galería de obras.
+- 🤖 Análisis de poses con MediaPipe + TensorFlow (PoseAI integrado).
+- 📱 Flujo de usuario simple: crear → procesar → ver resultado.
+- 🔔 PWA con `manifest.json` y `sw.js`.
+- 🎭 Backend con CRUD de obras en `/api/artworks`.
+- 🎯 Experiencia culturalmente contemporánea: estética de museo, archivo histórico y revista literaria.
+
 
 ## Estructura del proyecto
 

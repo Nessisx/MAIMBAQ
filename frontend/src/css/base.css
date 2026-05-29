@@ -1,11 +1,11 @@
 :root {
-  --bg: #f9f0e3;
+  --bg: #F5F1EB;
   --card: #ffffff;
-  --gold: #f5a623;
-  --gold-dark: #d4891a;
-  --teal: #1a8a9a;
-  --text: #2c2c2c;
-  --text-muted: #888;
+  --primary: #B96863;
+  --primary-dark: #8B4D48;
+  --beige: #DCCCBD;
+  --text: #1E1E1E;
+  --text-muted: #6B6B6B;
   --radius: 20px;
   --radius-sm: 12px;
   --nav-h: 70px;
@@ -68,7 +68,7 @@ body {
   min-height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  background: #e8d5b7;
+  background: #E8DFD3;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,13 +84,13 @@ body {
   cursor: pointer;
 }
 .logo .ma {
-  color: var(--gold);
+  color: var(--primary);
 }
 .logo .im {
-  color: var(--teal);
+  color: var(--primary);
 }
 .logo .baq {
-  color: var(--gold);
+  color: var(--primary);
 }
 .settings-btn {
   width: 36px;
@@ -158,7 +158,7 @@ body {
   transform: none;
 }
 .nav-item.active {
-  background: var(--gold);
+  background: var(--primary);
   color: #fff;
   border-color: transparent;
 }
@@ -196,7 +196,7 @@ body {
 .modal-img {
   width: 100%;
   aspect-ratio: 1;
-  background: linear-gradient(135deg, #1a1a3e, #2d4a7a);
+  background: linear-gradient(135deg, #B96863, #8B4D48);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,7 +221,7 @@ body {
 }
 .modal-close {
   width: 100%;
-  background: var(--gold);
+  background: var(--primary);
   border: none;
   border-radius: 50px;
   padding: 14px;
@@ -248,7 +248,7 @@ body {
   transform: translateX(-50%);
   width: calc(100% - 30px);
   max-width: 400px;
-  background: var(--teal);
+  background: var(--primary);
   color: #fff;
   border-radius: var(--radius);
   padding: 14px 16px;
@@ -321,7 +321,7 @@ body {
   font-family: "Fredoka", sans-serif;
   font-size: 16px;
   font-weight: 600;
-  color: #1d2428;
+  color: #1E1E1E;
   background: #ffffff;
   cursor: pointer;
 }

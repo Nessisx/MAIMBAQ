@@ -41,7 +41,7 @@
 }
 .datos-art-preview .edit-float {
   position: relative;
-  background: var(--gold);
+  background: var(--primary);
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -58,7 +58,7 @@
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 .datos-art-preview .edit-float-gallery {
-  background: var(--teal);
+  background: var(--primary);
 }
 .datos-art-preview .foto-input {
   display: none;
@@ -101,7 +101,7 @@
 .field-label {
   font-size: 15px;
   font-weight: 800;
-  color: var(--teal);
+  color: var(--primary);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -120,7 +120,7 @@
   outline: none;
 }
 .field-input:focus {
-  box-shadow: 0 0 0 2px var(--gold);
+  box-shadow: 0 0 0 2px var(--primary);
 }
 .field-input::placeholder {
   color: #bbb;
@@ -140,7 +140,7 @@
   text-decoration: none;
   width: 100%;
   text-align: center;
-  background: var(--gold);
+  background: var(--primary);
   border: none;
   border-radius: 50px;
   padding: 18px;
@@ -159,7 +159,7 @@
   height: 38px;
   border-radius: 50%;
   background: #fff;
-  color: var(--teal);
+  color: var(--primary);
   display: inline-flex;
   align-items: center;
   justify-content: center;

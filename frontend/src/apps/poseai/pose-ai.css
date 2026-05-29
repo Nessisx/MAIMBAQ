@@ -1,16 +1,16 @@
 /* ===========================
-   VARIABLES & RESET (MAIMBAQ Colors)
+   VARIABLES & RESET (MAIMBAQ Colors - New Palette)
 =========================== */
 :root {
-  --bg: #1a1008;
-  --surface: #251808;
-  --surface2: #2e1e0a;
-  --border: #3a2510;
-  --accent: #f5a623;
-  --accent-dark: #e8860a;
-  --accent2: #4caf50;
-  --text: #fff8ee;
-  --text-muted: #c9a06a;
+  --bg: #F5F1EB;
+  --surface: #ffffff;
+  --surface2: #F0EBE3;
+  --border: #E0D5CB;
+  --accent: #B96863;
+  --accent-dark: #8B4D48;
+  --accent2: #8B6F47;
+  --text: #1E1E1E;
+  --text-muted: #6B6B6B;
   --radius: 20px;
   --radius-sm: 12px;
   --mono: "Nunito", sans-serif;
@@ -298,7 +298,7 @@ body::before {
 }
 
 .remove-btn:hover {
-  background: #e53935;
+  background: #C4645A;
 }
 
 /* ===========================

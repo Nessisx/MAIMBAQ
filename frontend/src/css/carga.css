@@ -32,19 +32,19 @@
 .sparkle:nth-child(1) {
   top: 25%;
   left: 15%;
-  color: #7b68ee;
+  color: #B96863;
   animation-delay: 0s;
 }
 .sparkle:nth-child(2) {
   top: 20%;
   right: 18%;
-  color: #ff6b6b;
+  color: #8B6F47;
   animation-delay: 0.5s;
 }
 .sparkle:nth-child(3) {
   top: 55%;
   left: 8%;
-  color: #7b68ee;
+  color: #B96863;
   animation-delay: 0.8s;
 }
 
@@ -57,7 +57,7 @@
   font-weight: 600;
 }
 .carga-text .magic {
-  color: var(--gold);
+  color: var(--primary);
   font-style: italic;
 }
 
@@ -70,13 +70,13 @@
 .progress-bar {
   width: 220px;
   height: 6px;
-  background: #e0d5c5;
+  background: #E8DFD3;
   border-radius: 10px;
   overflow: hidden;
 }
 .progress-fill {
   height: 100%;
-  background: var(--teal);
+  background: var(--primary);
   border-radius: 10px;
   width: 0%;
   transition: width 0.3s;

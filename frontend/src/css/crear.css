@@ -33,7 +33,7 @@
   min-height: 220px;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.26), transparent 42%),
-    linear-gradient(180deg, #f8b33d 0%, #f5a623 42%, #e48d1a 100%);
+    linear-gradient(180deg, #C0796A 0%, #B96863 42%, #A05857 100%);
   border-radius: 32px;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,7 @@
   position: relative;
   overflow: hidden;
   box-shadow:
-    0 16px 34px rgba(245, 166, 35, 0.28),
+    0 16px 34px rgba(185, 104, 99, 0.28),
     0 4px 10px rgba(0, 0, 0, 0.08);
   transition:
     transform 180ms ease,
@@ -66,7 +66,7 @@
 .scan-btn:focus-visible {
   transform: translateY(-2px);
   box-shadow:
-    0 20px 40px rgba(245, 166, 35, 0.32),
+    0 20px 40px rgba(185, 104, 99, 0.32),
     0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
@@ -129,7 +129,7 @@
 }
 .recientes-header a {
   font-size: 14px;
-  color: var(--teal);
+  color: var(--primary);
   font-weight: 700;
   text-decoration: none;
 }
@@ -204,7 +204,7 @@
 
 .pro-tip {
   background: #fff8ef;
-  border: 2px dashed #f5a62380;
+  border: 2px dashed #B9686380;
   border-radius: var(--radius);
   padding: 16px;
   display: flex;

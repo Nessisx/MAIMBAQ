@@ -34,12 +34,12 @@
 .museo-toolbar label {
   font-size: 13px;
   font-weight: 800;
-  color: var(--teal);
+  color: var(--primary);
 }
 .museo-toolbar select {
   appearance: none;
   -webkit-appearance: none;
-  border: 1px solid #eadfce;
+  border: 1px solid #D9CFC2;
   border-radius: 999px;
   padding: 10px 14px;
   background: #fff;
@@ -70,10 +70,10 @@
   transform: scale(0.96);
 }
 .museo-card.gold-border {
-  border-color: var(--gold);
+  border-color: var(--primary);
 }
 .museo-card.teal-border {
-  border-color: var(--teal);
+  border-color: var(--primary);
 }
 
 .museo-card-media {
@@ -81,7 +81,7 @@
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-  background: linear-gradient(135deg, #f0e8d8, #e0d0c0);
+  background: linear-gradient(135deg, #E8DFD3, #D9CFC2);
 }
 .museo-card-img,
 .museo-card-photo {
@@ -120,7 +120,7 @@
   gap: 6px;
   padding: 8px 8px 0;
   font-size: 12px;
-  color: var(--gold-dark);
+  color: var(--primary-dark);
   font-weight: 800;
 }
 .museo-card-rating span {
@@ -136,8 +136,8 @@
 }
 .rating-star {
   border: none;
-  background: #fff7ea;
-  color: var(--gold);
+  background: #fffdfb;
+  color: var(--primary);
   border-radius: 999px;
   width: 28px;
   height: 28px;
@@ -162,8 +162,8 @@
   margin: 0 12px 10px;
 }
 .gold-line {
-  background: var(--gold);
+  background: var(--primary);
 }
 .teal-line {
-  background: var(--teal);
+  background: var(--primary);
 }
