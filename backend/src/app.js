@@ -28,7 +28,16 @@ const pagesRoot = path.join(projectRoot, 'pages');
 
 const app = express();
 
-app.use(helmet());
+// En desarrollo, desactivar helmet CSP para permitir inline event handlers
+// En producción, helmet CSP protege contra ataques
+if (process.env.NODE_ENV === 'production') {
+  app.use(helmet());
+} else {
+  app.use(helmet.contentSecurityPolicy(false));
+  app.use(helmet.xContentTypeOptions());
+  app.use(helmet.xFrameOptions());
+  app.use(helmet.xXssProtection());
+}
 app.use(
   cors({
     origin:
@@ -46,6 +55,8 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
+// Servir archivos estáticos desde la raíz para manifest.json, icons, etc.
+app.use(express.static(projectRoot));
 app.use('/frontend', express.static(frontendRoot));
 app.use('/pages', express.static(pagesRoot));
 
@@ -79,7 +90,7 @@ const startServer = async () => {
   await connectDB();
 
   const { port } = await listenOnPort(basePort, 5);
-  console.log(`MAIMBAQ API ejecutándose en http://localhost:${port}`);
+  console.log(`MAIMBAQ ejecutándose en http://localhost:${port}`);
 };
 
 if (require.main === module) {

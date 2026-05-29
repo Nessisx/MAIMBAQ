@@ -587,16 +587,16 @@
         </div>
 
         <div class="dots" id="dots">
-          <div class="dot active" onclick="goSlide(0)"></div>
-          <div class="dot" onclick="goSlide(1)"></div>
-          <div class="dot" onclick="goSlide(2)"></div>
+          <div class="dot active" data-slide="0"></div>
+          <div class="dot" data-slide="1"></div>
+          <div class="dot" data-slide="2"></div>
         </div>
 
         <div class="cta-slides" id="cta-slides">
-          <button class="btn-next" id="btn-next" onclick="nextSlide()">
+          <button class="btn-next" id="btn-next">
             Siguiente →
           </button>
-          <button class="btn-ghost" onclick="goToName()">Saltar intro</button>
+          <button class="btn-ghost" id="btn-skip">Saltar intro</button>
         </div>
 
         <!-- PASO NOMBRE -->
@@ -627,6 +627,12 @@
 
             <a class="btn-ghost" href="pages/dashboard.html"
               >¿Tienes cuenta? <strong>Entra al tablero</strong></a
+            >
+
+            <div class="divider-or"><span>— o prueba PoseAI —</span></div>
+
+            <a class="btn-ghost" href="frontend/src/apps/poseai/poseai.html"
+              ><strong>Analiza poses 🤖</strong></a
             >
           </div>
         </div>
@@ -678,20 +684,28 @@
       // Slides
       let cur = 0;
       function goSlide(n) {
-        document.getElementById(`slide-${cur}`).classList.remove("active");
+        console.log("goSlide called with n=", n, "cur=", cur);
+        const prevEl = document.getElementById(`slide-${cur}`);
+        if (prevEl) {
+          prevEl.classList.remove("active");
+        }
         cur = n;
         const s = document.getElementById(`slide-${cur}`);
-        s.style.animation = "none";
-        s.offsetHeight;
-        s.style.animation = "";
-        s.classList.add("active");
-        document
-          .querySelectorAll(".dot")
-          .forEach((d, i) => d.classList.toggle("active", i === cur));
-        document.getElementById("btn-next").textContent =
-          cur === 2 ? "¡Vamos! 🎉" : "Siguiente →";
+        if (s) {
+          s.style.animation = "none";
+          s.offsetHeight;
+          s.style.animation = "";
+          s.classList.add("active");
+        }
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((d, i) => d.classList.toggle("active", i === cur));
+        const btn = document.getElementById("btn-next");
+        if (btn) {
+          btn.textContent = cur === 2 ? "¡Vamos! 🎉" : "Siguiente →";
+        }
       }
       function nextSlide() {
+        console.log("nextSlide called, cur=", cur);
         cur < 2 ? goSlide(cur + 1) : goToName();
       }
 
@@ -750,6 +764,15 @@
           );
         }, 700);
       }
+
+      // Asignar event listeners para slides (evita CSP que bloquea onclick inline)
+      document.querySelectorAll(".dot").forEach((dot) => {
+        dot.addEventListener("click", () => {
+          goSlide(parseInt(dot.dataset.slide));
+        });
+      });
+      document.getElementById("btn-next").addEventListener("click", nextSlide);
+      document.getElementById("btn-skip").addEventListener("click", goToName);
 
       // Auto-skip si ya hay sesión
       if (sessionStorage.getItem("maimbaq_user"))
