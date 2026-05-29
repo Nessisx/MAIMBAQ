@@ -639,3 +639,74 @@ body::before {
 .hidden {
   display: none !important;
 }
+
+/* ===========================
+   BOTTOM NAVIGATION (MAIMBAQ Integration)
+=========================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  background: #fff;
+  border-top: 1px solid #eee;
+  z-index: 200;
+  transition: transform 200ms ease;
+  transform: translateY(0);
+}
+
+.bottom-nav.hide {
+  transform: translateY(100%);
+}
+
+.bottom-nav-inner {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.nav-item {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: "Nunito", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B6B6B;
+  padding: 6px 10px;
+  border-radius: 30px;
+  min-width: 72px;
+  height: 48px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.nav-item .icon {
+  font-size: 18px;
+}
+
+.nav-item:active {
+  transform: none;
+}
+
+.nav-item.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Adjust main content to accommodate fixed bottom nav */
+.main {
+  padding-bottom: calc(70px + 80px);
+}
