@@ -4,8 +4,8 @@
   "description": "Convierte tus dibujos en obras maestras digitales con inteligencia artificial",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#F9F0E3",
-  "theme_color": "#F5A623",
+  "background_color": "#F5F1EB",
+  "theme_color": "#B96863",
   "orientation": "portrait",
   "icons": [
     {

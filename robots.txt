@@ -1,0 +1,14 @@
+# MAIMBAQ - Robots.txt for SEO
+# Allow search engines to crawl the entire site
+
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /backend/
+Disallow: /.git/
+
+# Sitemap
+Sitemap: https://nessisx.github.io/MAIMBAQ/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

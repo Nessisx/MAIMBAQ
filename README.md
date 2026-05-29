@@ -31,24 +31,69 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 - 🎭 Backend con CRUD de obras en `/api/artworks`.
 - 🎯 Experiencia culturalmente contemporánea: estética de museo, archivo histórico y revista literaria.
 
+## Galería de Pantallas
+
+### Página Principal
+![Página Inicial](frontend/src/assets/images/pagina_inicial.png)
+*Interfaz de bienvenida con onboarding interactivo y acceso personalizado por nombre del usuario.*
+
+### Dashboard
+![Dashboard](frontend/src/assets/images/mambaq.jpeg)
+*Centro de control con acceso rápido a las principales funciones de la aplicación.*
+
+### Crear Obra
+![Crear Obra](frontend/src/assets/images/museo_beta.png)
+*Interfaz para capturar o subir dibujos y convertirlos en obras digitales.*
+
+### Museo Virtual
+![Museo](frontend/src/assets/images/museo_beta.png)
+*Galería interactiva mostrando todas las obras creadas y compartidas por la comunidad.*
+
+### Análisis de Poses (PoseAI)
+![PoseAI](frontend/src/assets/images/poseAI.png)
+*Herramienta de IA que analiza poses corporales con MediaPipe + TensorFlow en tiempo real.*
+
+### Sobre Nosotros
+![Sobre Nosotros](frontend/src/assets/images/sobre_nosotros.png)
+*Información sobre el equipo, organización y propósito de MAIMBAQ.*
 
 ## Estructura del proyecto
 
-- `index.html`
-- `manifest.json`
-- `sw.js`
-- `pages/`
-- `frontend/src/css/`
-- `frontend/src/js/`
-- `frontend/src/assets/`
-- `backend/package.json`
-- `backend/src/app.js`
-- `backend/src/routes/`
-- `backend/src/models/`
-- `backend/src/database/connect.js`
-- `backend/src/middlewares/`
-- `docs/api/README.md`
-- `docs/requirements/README.md`
+```
+MAIMBAQ/
+├── index.html                          # Entrada principal
+├── pages/                              # Páginas secundarias
+│   ├── dashboard.html
+│   ├── crear.html
+│   ├── museo.html
+│   ├── resultado.html
+│   └── sobre.html
+├── frontend/
+│   └── src/
+│       ├── css/                        # Estilos
+│       ├── js/                         # Lógica del cliente
+│       ├── apps/
+│       │   └── poseai/                 # Análisis de poses con IA
+│       └── assets/
+│           ├── images/                 # Capturas de pantalla
+│           ├── icons/                  # Íconos PWA
+│           └── fonts/                  # Tipografías
+├── backend/
+│   ├── package.json
+│   └── src/
+│       ├── app.js                      # Servidor Express
+│       ├── routes/                     # Endpoints API
+│       ├── models/                     # Modelos Mongoose
+│       ├── database/                   # Conexión DB
+│       ├── middlewares/                # Middleware personalizado
+│       └── utils/                      # Utilidades
+├── docs/
+│   ├── api/                            # Documentación de API
+│   └── requirements/                   # Requisitos del proyecto
+├── sitemap.xml                         # Mapa del sitio para SEO
+├── robots.txt                          # Configuración de bots
+└── manifest.json                       # Configuración PWA
+```
 
 ## Ejecución local
 
@@ -87,19 +132,52 @@ CLIENT_ORIGIN=http://localhost:3000
 NODE_ENV=development
 ```
 
-## API principal
+## API REST
 
-Base URL local: `http://localhost:5000/api`
+### Base URL
+- Local: `http://localhost:5000/api`
+- Production: `https://tu-api.com/api`
 
-- `GET /api/health`
-- `GET /api/artworks`
-- `GET /api/artworks/:id`
-- `POST /api/artworks`
-- `PATCH /api/artworks/:id`
-- `DELETE /api/artworks/:id`
+### Endpoints
 
-### Ejemplo de creación de obra
+#### Health Check
+```http
+GET /api/health
+```
+Respuesta:
+```json
+{
+  "status": "ok",
+  "message": "Server is running"
+}
+```
 
+#### Listar todas las obras
+```http
+GET /api/artworks
+```
+Respuesta:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "507f1f77bcf86cd799439011",
+      "title": "Dinosaurio Espacial",
+      "artist": "Carlos",
+      "style": "Fantasía",
+      "imageUrl": "https://..."
+    }
+  ]
+}
+```
+
+#### Obtener obra por ID
+```http
+GET /api/artworks/:id
+```
+
+#### Crear nueva obra
 ```http
 POST /api/artworks
 Content-Type: application/json
@@ -112,10 +190,49 @@ Content-Type: application/json
 }
 ```
 
+#### Actualizar obra
+```http
+PATCH /api/artworks/:id
+Content-Type: application/json
+
+{
+  "title": "Nuevo título",
+  "style": "Realismo"
+}
+```
+
+#### Eliminar obra
+```http
+DELETE /api/artworks/:id
+```
+
+Para documentación interactiva completa, consulta [docs/api/README.md](docs/api/README.md).
+
 ## Documentación adicional
 
-- `docs/api/README.md` — endpoints de la API.
-- `docs/requirements/README.md` — requisitos funcionales y técnicos.
+- [API Documentation](docs/api/README.md) — endpoints detallados y ejemplos
+- [Requirements](docs/requirements/README.md) — requisitos funcionales y técnicos
+- [API Spec (OpenAPI)](docs/api/swagger.json) — especificación OpenAPI/Swagger
+
+## Paleta de Colores
+
+La aplicación utiliza una paleta de colores culturalmente contemporánea inspirada en museos, archivos y revistas literarias:
+
+- **Primario (Terracota)**: `#B96863`
+- **Primario Oscuro**: `#8B4D48`
+- **Beige (Papel)**: `#DCCCBD`
+- **Marfil (Fondo)**: `#F5F1EB`
+- **Negro Carbón (Texto)**: `#1E1E1E`
+- **Verde Natural**: `#6B8A4F`
+- **Rojo Natural**: `#C4645A`
+
+## Tecnologías Principales
+
+- **Frontend**: HTML5, CSS3, JavaScript vanilla, PWA
+- **Backend**: Node.js, Express.js, Mongoose
+- **Database**: MongoDB
+- **IA**: MediaPipe, TensorFlow.js
+- **Deploy**: GitHub Pages (frontend), cualquier servidor Node (backend)
 
 ## Contribuir
 
@@ -124,6 +241,10 @@ Content-Type: application/json
 3. Haz commit de tus cambios.
 4. Envía un pull request.
 
+## Licencia
+
+MIT - Ver [LICENSE](LICENSE) para más detalles.
+
 ---
 
-Hecho con foco en experiencia de dibujo y arte digital.
+Hecho con foco en experiencia de dibujo y arte digital. 🎨✨
