@@ -92,6 +92,84 @@ extraStyles.textContent = `
     font-size:.65rem;
     color:rgba(255,248,238,.5); margin-bottom:1rem;
   }
+  .battle-card {
+    width:100%;
+    margin-top:1rem;
+    padding:1rem;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    display:grid;
+    gap:.75rem;
+  }
+  .battle-eyebrow {
+    display:inline-flex;
+    align-self:flex-start;
+    padding:.35rem .65rem;
+    border-radius:999px;
+    font-size:.62rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    background:rgba(255,255,255,.04);
+  }
+  .battle-grid {
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:.75rem;
+    align-items:center;
+  }
+  .battle-pill {
+    padding:.8rem .9rem;
+    border-radius:16px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .battle-label {
+    display:block;
+    font-size:.62rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin-bottom:.3rem;
+  }
+  .battle-value {
+    display:block;
+    font-size:1.15rem;
+    font-weight:800;
+    color:var(--text);
+  }
+  .battle-vs {
+    font-size:1.1rem;
+    font-weight:800;
+    color:var(--accent);
+    text-align:center;
+  }
+  .battle-result {
+    padding:.85rem 1rem;
+    border-radius:16px;
+    font-size:.9rem;
+    font-weight:800;
+    text-align:center;
+  }
+  .battle-result.win {
+    color:#85f29a;
+    background:rgba(133,242,154,.12);
+  }
+  .battle-result.lose {
+    color:#ffb2a8;
+    background:rgba(255,178,168,.12);
+  }
+  .battle-result.draw {
+    color:#f0d58a;
+    background:rgba(240,213,138,.12);
+  }
+  .battle-note {
+    font-size:.7rem;
+    line-height:1.5;
+    color:var(--text-muted);
+    text-align:center;
+  }
   .r-bars  { width:100%; display:flex; flex-direction:column; gap:.5rem; }
   .r-bar-row {
     display:grid; grid-template-columns:64px 1fr 48px;
@@ -310,6 +388,10 @@ async function analyzeImage(dataUrl) {
 // ── Render resultado ──────────────────────────────────────────
 function displayResults(result) {
   const emojis = { Piedra: "🪨", Papel: "📄", Tijera: "✂️" };
+  const platformMove = ["Piedra", "Papel", "Tijera"][
+    Math.floor(Math.random() * 3)
+  ];
+  const outcome = getBattleOutcome(result.className, platformMove);
   const sorted = [...result.all].sort((a, b) => b.probability - a.probability);
 
   const barsHtml = sorted
@@ -333,8 +415,55 @@ function displayResults(result) {
       <div class="r-name">${result.className}</div>
       <div class="r-conf">Confianza: ${(result.probability * 100).toFixed(0)}%</div>
       <div class="r-method">via ${result.method}</div>
+      <div class="battle-card">
+        <div class="battle-eyebrow">Duelo visual</div>
+        <div class="battle-grid">
+          <div class="battle-pill">
+            <span class="battle-label">Tu foto</span>
+            <span class="battle-value">${result.className}</span>
+          </div>
+          <div class="battle-vs">VS</div>
+          <div class="battle-pill">
+            <span class="battle-label">La plataforma</span>
+            <span class="battle-value">${platformMove}</span>
+          </div>
+        </div>
+        <div class="battle-result ${outcome.state}">
+          ${outcome.message}
+        </div>
+          <div class="battle-note">
+            La app juega con un 33% de piedra, papel o tijera en cada ronda.
+          </div>
+      </div>
       <div class="r-bars">${barsHtml}</div>
     </div>`;
+}
+
+function getBattleOutcome(playerMove, platformMove) {
+  if (playerMove === platformMove) {
+    return {
+      state: "draw",
+      message: "Empate: la foto coincidió con la jugada de la app.",
+    };
+  }
+
+  const winsAgainst = {
+    Piedra: "Tijera",
+    Papel: "Piedra",
+    Tijera: "Papel",
+  };
+
+  if (winsAgainst[playerMove] === platformMove) {
+    return {
+      state: "win",
+      message: "Ganaste: tu pose venció la jugada de la app.",
+    };
+  }
+
+  return {
+    state: "lose",
+    message: "Perdiste: la app ganó esta ronda.",
+  };
 }
 
 // ── Botón analizar ────────────────────────────────────────────
