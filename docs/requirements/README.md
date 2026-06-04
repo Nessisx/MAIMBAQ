@@ -28,9 +28,9 @@ Este documento resume los requisitos del proyecto MAIMBAQ de forma clara y separ
 
 ## Archivos clave
 
-- [backend/src/app.js](../../backend/src/app.js)
-- [backend/src/routes/artwork.routes.js](../../backend/src/routes/artwork.routes.js)
-- [index.html](../../index.html)
-- [pages/crear.html](../../pages/crear.html)
-- [pages/museo.html](../../pages/museo.html)
-- [pages/sobre.html](../../pages/sobre.html)
+- `backend/src/app.js`
+- `backend/src/routes/artwork.routes.js`
+- `index.html` (archivo raíz del frontend)
+- `pages/crear.html` (página de creación)
+- `pages/museo.html` (página museo)
+- `pages/sobre.html` (página sobre)
