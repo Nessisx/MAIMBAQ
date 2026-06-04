@@ -34,28 +34,34 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 ## Galería de Pantallas
 
 ### Página Principal
-![Página Inicial](frontend/src/assets/images/pagina_inicial.png)
-*Interfaz de bienvenida con onboarding interactivo y acceso personalizado por nombre del usuario.*
+
+![Página Inicial](frontend/src/assets/images/placeholder.png)
+_Interfaz de bienvenida con onboarding interactivo y acceso personalizado por nombre del usuario._
 
 ### Dashboard
-![Dashboard](frontend/src/assets/images/mambaq.jpeg)
-*Centro de control con acceso rápido a las principales funciones de la aplicación.*
+
+![Dashboard](frontend/src/assets/images/pagina_inicial.png)
+_Centro de control con acceso rápido a las principales funciones de la aplicación._
 
 ### Crear Obra
+
 ![Crear Obra](frontend/src/assets/images/museo_beta.png)
-*Interfaz para capturar o subir dibujos y convertirlos en obras digitales.*
+_Interfaz para capturar o subir dibujos y convertirlos en obras digitales._
 
 ### Museo Virtual
+
 ![Museo](frontend/src/assets/images/museo_beta.png)
-*Galería interactiva mostrando todas las obras creadas y compartidas por la comunidad.*
+_Galería interactiva mostrando todas las obras creadas y compartidas por la comunidad._
 
 ### Análisis de Poses (PoseAI)
+
 ![PoseAI](frontend/src/assets/images/poseAI.png)
-*Herramienta de IA que analiza poses corporales con MediaPipe + TensorFlow en tiempo real.*
+_Herramienta de IA que analiza poses corporales con MediaPipe + TensorFlow en tiempo real._
 
 ### Sobre Nosotros
+
 ![Sobre Nosotros](frontend/src/assets/images/sobre_nosotros.png)
-*Información sobre el equipo, organización y propósito de MAIMBAQ.*
+_Información sobre el equipo, organización y propósito de MAIMBAQ._
 
 ## Estructura del proyecto
 
@@ -135,16 +141,20 @@ NODE_ENV=development
 ## API REST
 
 ### Base URL
+
 - Local: `http://localhost:5000/api`
 - Production: `https://tu-api.com/api`
 
 ### Endpoints
 
 #### Health Check
+
 ```http
 GET /api/health
 ```
+
 Respuesta:
+
 ```json
 {
   "status": "ok",
@@ -153,10 +163,13 @@ Respuesta:
 ```
 
 #### Listar todas las obras
+
 ```http
 GET /api/artworks
 ```
+
 Respuesta:
+
 ```json
 {
   "success": true,
@@ -173,11 +186,13 @@ Respuesta:
 ```
 
 #### Obtener obra por ID
+
 ```http
 GET /api/artworks/:id
 ```
 
 #### Crear nueva obra
+
 ```http
 POST /api/artworks
 Content-Type: application/json
@@ -191,6 +206,7 @@ Content-Type: application/json
 ```
 
 #### Actualizar obra
+
 ```http
 PATCH /api/artworks/:id
 Content-Type: application/json
@@ -202,6 +218,7 @@ Content-Type: application/json
 ```
 
 #### Eliminar obra
+
 ```http
 DELETE /api/artworks/:id
 ```
