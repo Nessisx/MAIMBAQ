@@ -14,7 +14,7 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 
 ## Documentación Docusaurus
 
-- [DocuSaurus](https://nessisx.github.io/MAIMBAQ/) Recomendamos borrar caché de pagina si ya abrió, anteriormente este mismo link.
+- [DocuSaurus](https://nessisx.github.io/MAIMBAQ/) Recomendamos borrar caché de pagina si ya abrió anteriormente este mismo link.
 
 ## Qué incluye
 
@@ -140,6 +140,17 @@ La aplicación utiliza una paleta de colores culturalmente contemporánea inspir
 - **IA**: MediaPipe, TensorFlow.js
 - **Deploy**: GitHub Pages (frontend), cualquier servidor Node (backend)
 
+## Evolución del proyecto
+
+- Fase 0 — Idea y prototipo: concepto inicial y primeras pantallas estáticas.
+- Fase 1 — MVP frontend: interfaz móvil-first para crear y visualizar obras.
+- Fase 2 — Backend y API: endpoints CRUD para `artworks` y almacenamiento en MongoDB.
+- Fase 3 — Integración IA: análisis de poses con MediaPipe/TensorFlow para enriquecer resultados.
+- Fase 4 — Documentación pública: migración de docs a Docusaurus y publicación en GitHub Pages.
+- Fase 5 — Mantenimiento y mejoras: refactor, accesibilidad, y ajustes de diseño (actual).
+
+Si quieres que incluya fechas concretas o eventos adicionales, dime y lo actualizo.
+
 ## Contribuir
 
 1. Haz fork del repositorio.
@@ -153,5 +164,5 @@ MIT - Ver [LICENSE](LICENSE) para más detalles.
 
 ---
 
-Hecho con foco en experiencia de dibujo y arte digital. 🎨✨
-Espero les guste este grandiosisimo proyecto, para que todos los niños y niñas de toda barranquilla suban su hermosa creatividad, se que tendrán muy buenas obras
+Hecho con foco en experiencia de dibujo y arte digital.
+Espero les guste este grandiosisimo proyecto, para que todos los niños y niñas de toda barranquilla suban su hermosa creatividad. 🎨✨
