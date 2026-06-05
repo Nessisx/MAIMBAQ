@@ -275,3 +275,4 @@ MIT - Ver [LICENSE](LICENSE) para más detalles.
 ---
 
 Hecho con foco en experiencia de dibujo y arte digital. 🎨✨
+Espero les guste este grandiosisimo proyecto, para que todos los niños y niñas de toda barranquilla suban su hermosa creatividad, se que tendrán muy buenas obras
