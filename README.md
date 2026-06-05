@@ -130,7 +130,8 @@ Pasos resumidos:
 git add .
 git commit -m "Prepare for Heroku deploy"
 heroku login
-heroku create <nombre-de-tu-app>
+heroku create maimbaq-dba2ec399b00
+App pública: https://maimbaq-dba2ec399b00.herokuapp.com/
 git push heroku main
 ```
 
