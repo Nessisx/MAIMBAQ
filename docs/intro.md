@@ -3,11 +3,19 @@ slug: intro
 title: Introducción
 ---
 
-# Bienvenido a la documentación de MAIMBAQ
+# MAIMBAQ Docs
 
-Esta documentación cubre el backend y el frontend del proyecto.
+Documentación oficial del proyecto MAIMBAQ: flujo creativo, API REST, requisitos y despliegue de la documentación en GitHub Pages.
 
-- Ver la API: [/docs/api](./api/README.md)
-- Requisitos: [/docs/requirements](./requirements/README.md)
+## Qué encontrarás aquí
 
-Si quieres enlazar páginas del frontend (`pages/*.html`), considera mover esos contenidos a `docs/` o crear páginas estáticas en `website/static/`.
+- Cómo funciona la aplicación y sus pantallas principales.
+- La API REST del backend con ejemplos de uso.
+- Los requisitos funcionales y técnicos del proyecto.
+- El sitio de documentación publicado en GitHub Pages.
+
+## Ruta recomendada
+
+1. Empieza por [API](./api/README.md) si quieres entender el backend.
+2. Sigue con [Requirements](./requirements/README.md) para ver el alcance del producto.
+3. Revisa [MAIMBAQ API Documentation](./api/APIDOC.md) para detalles de endpoints.

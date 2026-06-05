@@ -10,13 +10,17 @@
 
 **Status**: Active
 
-Este documento describe todos los endpoints disponibles en la API REST de MAIMBAQ. La API gestiona obras de arte digitales, incluyendo operaciones de CRUD completo.
+Este documento describe los endpoints del backend de MAIMBAQ y cómo se conectan con la experiencia de la app.
+
+## Contexto de la API
+
+La API alimenta el flujo de creación y museo virtual de MAIMBAQ. Su responsabilidad principal es guardar y consultar obras digitales, junto con la metadata asociada.
 
 ---
 
 ## Authentication
 
-Actualmente, la API no requiere autenticación. En versiones futuras se implementará JWT o OAuth2.
+Actualmente, la API no requiere autenticación. En versiones futuras se puede proteger con JWT u OAuth2 si el proyecto lo necesita.
 
 ---
 
@@ -25,6 +29,7 @@ Actualmente, la API no requiere autenticación. En versiones futuras se implemen
 Todas las respuestas siguen un formato consistente:
 
 ### Success Response (2xx)
+
 ```json
 {
   "success": true,
@@ -34,6 +39,7 @@ Todas las respuestas siguen un formato consistente:
 ```
 
 ### Error Response (4xx, 5xx)
+
 ```json
 {
   "success": false,
@@ -51,11 +57,13 @@ Todas las respuestas siguen un formato consistente:
 Verifica que el servidor esté funcionando.
 
 #### Request
+
 ```http
 GET /api/health
 ```
 
 #### Response (200 OK)
+
 ```json
 {
   "status": "ok",
@@ -65,6 +73,7 @@ GET /api/health
 ```
 
 #### cURL Example
+
 ```bash
 curl -X GET http://localhost:5000/api/health
 ```
@@ -76,19 +85,22 @@ curl -X GET http://localhost:5000/api/health
 Obtiene la lista completa de obras. Soporta paginación y filtros.
 
 #### Request
+
 ```http
 GET /api/artworks
 ```
 
 #### Query Parameters
-| Parameter | Type | Description | Example |
-|-----------|------|-------------|---------|
-| `limit` | integer | Número máximo de obras a retornar (default: 20, max: 100) | `?limit=10` |
-| `skip` | integer | Número de obras a saltar (default: 0) | `?skip=20` |
-| `sort` | string | Campo para ordenar. Prefijo `-` para descendente | `?sort=-createdAt` |
-| `artist` | string | Filtrar por nombre del artista | `?artist=Carlos` |
+
+| Parameter | Type    | Description                                               | Example            |
+| --------- | ------- | --------------------------------------------------------- | ------------------ |
+| `limit`   | integer | Número máximo de obras a retornar (default: 20, max: 100) | `?limit=10`        |
+| `skip`    | integer | Número de obras a saltar (default: 0)                     | `?skip=20`         |
+| `sort`    | string  | Campo para ordenar. Prefijo `-` para descendente          | `?sort=-createdAt` |
+| `artist`  | string  | Filtrar por nombre del artista                            | `?artist=Carlos`   |
 
 #### Response (200 OK)
+
 ```json
 {
   "success": true,
@@ -128,14 +140,8 @@ GET /api/artworks
 }
 ```
 
-#### Response Format
-```json
-{
-  "items": [...]
-}
-```
-
 #### cURL Example
+
 ```bash
 # Listar todas las obras
 curl -X GET http://localhost:5000/api/artworks
@@ -151,11 +157,12 @@ curl -X GET "http://localhost:5000/api/artworks?artist=Carlos"
 ```
 
 #### Status Codes
-| Code | Description |
-|------|-------------|
-| 200 | Success |
-| 400 | Bad request (parámetros inválidos) |
-| 500 | Server error |
+
+| Code | Description                        |
+| ---- | ---------------------------------- |
+| 200  | Success                            |
+| 400  | Bad request (parámetros inválidos) |
+| 500  | Server error                       |
 
 ---
 
@@ -164,16 +171,19 @@ curl -X GET "http://localhost:5000/api/artworks?artist=Carlos"
 Obtiene una obra específica por su ID.
 
 #### Request
+
 ```http
 GET /api/artworks/:id
 ```
 
 #### URL Parameters
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `id` | string | Yes | MongoDB ObjectId o UUID de la obra |
+
+| Parameter | Type   | Required | Description                        |
+| --------- | ------ | -------- | ---------------------------------- |
+| `id`      | string | Yes      | MongoDB ObjectId o UUID de la obra |
 
 #### Response (200 OK)
+
 ```json
 {
   "success": true,
@@ -196,6 +206,7 @@ GET /api/artworks/:id
 ```
 
 #### Response (404 Not Found)
+
 ```json
 {
   "success": false,
@@ -205,6 +216,7 @@ GET /api/artworks/:id
 ```
 
 #### Response (400 Bad Request)
+
 ```json
 {
   "success": false,
@@ -214,31 +226,35 @@ GET /api/artworks/:id
 ```
 
 #### cURL Example
+
 ```bash
 curl -X GET http://localhost:5000/api/artworks/507f1f77bcf86cd799439011
 ```
 
 #### Status Codes
-| Code | Description |
-|------|-------------|
-| 200 | Success |
-| 400 | Invalid ID format |
-| 404 | Artwork not found |
-| 500 | Server error |
+
+| Code | Description       |
+| ---- | ----------------- |
+| 200  | Success           |
+| 400  | Invalid ID format |
+| 404  | Artwork not found |
+| 500  | Server error      |
 
 ---
 
 ### 4. Create Artwork
 
-Crea una nueva obra de arte.
+Crea una nueva obra de arte digital para el museo.
 
 #### Request
+
 ```http
 POST /api/artworks
 Content-Type: application/json
 ```
 
 #### Request Body
+
 ```json
 {
   "title": "Dinosaurio Espacial",
@@ -251,16 +267,18 @@ Content-Type: application/json
 ```
 
 #### Request Body Parameters
-| Parameter | Type | Required | Validation | Example |
-|-----------|------|----------|-----------|---------|
-| `title` | string | Yes | Min 3, Max 100 chars | "Dinosaurio Espacial" |
-| `artist` | string | Yes | Min 2, Max 50 chars | "Carlos" |
-| `style` | string | Yes | Max 50 chars | "Fantasía" |
-| `description` | string | No | Max 500 chars | "Un dinosaurio..." |
-| `imageUrl` | string | Yes | Valid URL | "https://..." |
-| `tags` | array | No | Max 5 tags, each max 30 chars | ["dinosaurio", "espacio"] |
+
+| Parameter     | Type   | Required | Validation                    | Example                   |
+| ------------- | ------ | -------- | ----------------------------- | ------------------------- |
+| `title`       | string | Yes      | Min 3, Max 100 chars          | "Dinosaurio Espacial"     |
+| `artist`      | string | Yes      | Min 2, Max 50 chars           | "Carlos"                  |
+| `style`       | string | Yes      | Max 50 chars                  | "Fantasía"                |
+| `description` | string | No       | Max 500 chars                 | "Un dinosaurio..."        |
+| `imageUrl`    | string | Yes      | Valid URL                     | "https://..."             |
+| `tags`        | array  | No       | Max 5 tags, each max 30 chars | ["dinosaurio", "espacio"] |
 
 #### Response (201 Created)
+
 ```json
 {
   "success": true,
@@ -284,6 +302,7 @@ Content-Type: application/json
 ```
 
 #### Response (400 Bad Request)
+
 ```json
 {
   "success": false,
@@ -293,6 +312,7 @@ Content-Type: application/json
 ```
 
 #### Response (400 Validation Error)
+
 ```json
 {
   "success": false,
@@ -302,6 +322,7 @@ Content-Type: application/json
 ```
 
 #### cURL Example
+
 ```bash
 curl -X POST http://localhost:5000/api/artworks \
   -H "Content-Type: application/json" \
@@ -316,6 +337,7 @@ curl -X POST http://localhost:5000/api/artworks \
 ```
 
 #### JavaScript/Fetch Example
+
 ```javascript
 const artwork = {
   title: "Dinosaurio Espacial",
@@ -323,13 +345,13 @@ const artwork = {
   style: "Fantasía",
   description: "Un dinosaurio navegando por el espacio",
   imageUrl: "https://example.com/image1.jpg",
-  tags: ["dinosaurio", "espacio"]
+  tags: ["dinosaurio", "espacio"],
 };
 
-const response = await fetch('http://localhost:5000/api/artworks', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(artwork)
+const response = await fetch("http://localhost:5000/api/artworks", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(artwork),
 });
 
 const result = await response.json();
@@ -337,12 +359,13 @@ console.log(result);
 ```
 
 #### Status Codes
-| Code | Description |
-|------|-------------|
-| 201 | Artwork created successfully |
-| 400 | Validation error or missing required fields |
-| 409 | Duplicate artwork (si aplica) |
-| 500 | Server error |
+
+| Code | Description                                 |
+| ---- | ------------------------------------------- |
+| 201  | Artwork created successfully                |
+| 400  | Validation error or missing required fields |
+| 409  | Duplicate artwork (si aplica)               |
+| 500  | Server error                                |
 
 ---
 
@@ -351,17 +374,20 @@ console.log(result);
 Actualiza una obra existente (actualización parcial permitida).
 
 #### Request
+
 ```http
 PATCH /api/artworks/:id
 Content-Type: application/json
 ```
 
 #### URL Parameters
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `id` | string | Yes | MongoDB ObjectId de la obra |
+
+| Parameter | Type   | Required | Description                 |
+| --------- | ------ | -------- | --------------------------- |
+| `id`      | string | Yes      | MongoDB ObjectId de la obra |
 
 #### Request Body (todos los campos son opcionales)
+
 ```json
 {
   "title": "Dinosaurio Espacial Mejorado",
@@ -373,18 +399,20 @@ Content-Type: application/json
 ```
 
 #### Request Body Parameters
-| Parameter | Type | Validation | Example |
-|-----------|------|-----------|---------|
-| `title` | string | Min 3, Max 100 chars | "Dinosaurio Espacial" |
-| `artist` | string | Min 2, Max 50 chars | "Carlos" |
-| `style` | string | Max 50 chars | "Fantasía Moderna" |
-| `description` | string | Max 500 chars | "Un dinosaurio..." |
-| `imageUrl` | string | Valid URL | "https://..." |
-| `tags` | array | Max 5 tags | ["dinosaurio", "espacio"] |
-| `views` | number | Non-negative | 300 |
-| `likes` | number | Non-negative | 25 |
+
+| Parameter     | Type   | Validation           | Example                   |
+| ------------- | ------ | -------------------- | ------------------------- |
+| `title`       | string | Min 3, Max 100 chars | "Dinosaurio Espacial"     |
+| `artist`      | string | Min 2, Max 50 chars  | "Carlos"                  |
+| `style`       | string | Max 50 chars         | "Fantasía Moderna"        |
+| `description` | string | Max 500 chars        | "Un dinosaurio..."        |
+| `imageUrl`    | string | Valid URL            | "https://..."             |
+| `tags`        | array  | Max 5 tags           | ["dinosaurio", "espacio"] |
+| `views`       | number | Non-negative         | 300                       |
+| `likes`       | number | Non-negative         | 25                        |
 
 #### Response (200 OK)
+
 ```json
 {
   "success": true,
@@ -408,6 +436,7 @@ Content-Type: application/json
 ```
 
 #### Response (404 Not Found)
+
 ```json
 {
   "success": false,
@@ -417,6 +446,7 @@ Content-Type: application/json
 ```
 
 #### Response (400 Validation Error)
+
 ```json
 {
   "success": false,
@@ -426,6 +456,7 @@ Content-Type: application/json
 ```
 
 #### cURL Example
+
 ```bash
 curl -X PATCH http://localhost:5000/api/artworks/507f1f77bcf86cd799439011 \
   -H "Content-Type: application/json" \
@@ -437,30 +468,35 @@ curl -X PATCH http://localhost:5000/api/artworks/507f1f77bcf86cd799439011 \
 ```
 
 #### JavaScript/Fetch Example
+
 ```javascript
 const updates = {
   title: "Dinosaurio Espacial Mejorado",
   likes: 25,
-  views: 300
+  views: 300,
 };
 
-const response = await fetch('http://localhost:5000/api/artworks/507f1f77bcf86cd799439011', {
-  method: 'PATCH',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(updates)
-});
+const response = await fetch(
+  "http://localhost:5000/api/artworks/507f1f77bcf86cd799439011",
+  {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updates),
+  },
+);
 
 const result = await response.json();
 console.log(result);
 ```
 
 #### Status Codes
-| Code | Description |
-|------|-------------|
-| 200 | Artwork updated successfully |
-| 400 | Validation error |
-| 404 | Artwork not found |
-| 500 | Server error |
+
+| Code | Description                  |
+| ---- | ---------------------------- |
+| 200  | Artwork updated successfully |
+| 400  | Validation error             |
+| 404  | Artwork not found            |
+| 500  | Server error                 |
 
 ---
 
@@ -469,16 +505,19 @@ console.log(result);
 Elimina una obra de arte.
 
 #### Request
+
 ```http
 DELETE /api/artworks/:id
 ```
 
 #### URL Parameters
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `id` | string | Yes | MongoDB ObjectId de la obra |
+
+| Parameter | Type   | Required | Description                 |
+| --------- | ------ | -------- | --------------------------- |
+| `id`      | string | Yes      | MongoDB ObjectId de la obra |
 
 #### Response (200 OK)
+
 ```json
 {
   "success": true,
@@ -502,6 +541,7 @@ DELETE /api/artworks/:id
 ```
 
 #### Response (404 Not Found)
+
 ```json
 {
   "success": false,
@@ -511,26 +551,32 @@ DELETE /api/artworks/:id
 ```
 
 #### cURL Example
+
 ```bash
 curl -X DELETE http://localhost:5000/api/artworks/507f1f77bcf86cd799439011
 ```
 
 #### JavaScript/Fetch Example
+
 ```javascript
-const response = await fetch('http://localhost:5000/api/artworks/507f1f77bcf86cd799439011', {
-  method: 'DELETE'
-});
+const response = await fetch(
+  "http://localhost:5000/api/artworks/507f1f77bcf86cd799439011",
+  {
+    method: "DELETE",
+  },
+);
 
 const result = await response.json();
 console.log(result);
 ```
 
 #### Status Codes
-| Code | Description |
-|------|-------------|
-| 200 | Artwork deleted successfully |
-| 404 | Artwork not found |
-| 500 | Server error |
+
+| Code | Description                  |
+| ---- | ---------------------------- |
+| 200  | Artwork deleted successfully |
+| 404  | Artwork not found            |
+| 500  | Server error                 |
 
 ---
 
@@ -538,13 +584,13 @@ console.log(result);
 
 ### Common Error Codes
 
-| Status Code | Error Type | Description | Example |
-|-------------|-----------|-------------|---------|
-| 400 | Bad Request | Datos inválidos o campos faltantes | `{ "error": "El título es requerido." }` |
-| 404 | Not Found | Recurso no encontrado | `{ "error": "Obra no encontrada." }` |
-| 409 | Conflict | Conflicto con datos existentes | `{ "error": "Una obra con este título ya existe." }` |
-| 422 | Unprocessable Entity | Validación fallida | `{ "error": "Validación fallida: ..." }` |
-| 500 | Internal Server Error | Error del servidor | `{ "error": "Error interno del servidor" }` |
+| Status Code | Error Type            | Description                        | Example                                              |
+| ----------- | --------------------- | ---------------------------------- | ---------------------------------------------------- |
+| 400         | Bad Request           | Datos inválidos o campos faltantes | `{ "error": "El título es requerido." }`             |
+| 404         | Not Found             | Recurso no encontrado              | `{ "error": "Obra no encontrada." }`                 |
+| 409         | Conflict              | Conflicto con datos existentes     | `{ "error": "Una obra con este título ya existe." }` |
+| 422         | Unprocessable Entity  | Validación fallida                 | `{ "error": "Validación fallida: ..." }`             |
+| 500         | Internal Server Error | Error del servidor                 | `{ "error": "Error interno del servidor" }`          |
 
 ### Error Response Format
 
@@ -567,17 +613,17 @@ console.log(result);
 
 ```typescript
 interface Artwork {
-  _id: string;                    // MongoDB ObjectId
-  title: string;                  // Required, 3-100 chars
-  artist: string;                 // Required, 2-50 chars
-  style: string;                  // Required, max 50 chars
-  description?: string;           // Optional, max 500 chars
-  imageUrl: string;               // Required, valid URL
-  tags?: string[];                // Optional, max 5 tags
-  views: number;                  // Default: 0
-  likes: number;                  // Default: 0
-  createdAt: Date;                // Auto-generated
-  updatedAt: Date;                // Auto-generated
+  _id: string; // MongoDB ObjectId
+  title: string; // Required, 3-100 chars
+  artist: string; // Required, 2-50 chars
+  style: string; // Required, max 50 chars
+  description?: string; // Optional, max 500 chars
+  imageUrl: string; // Required, valid URL
+  tags?: string[]; // Optional, max 5 tags
+  views: number; // Default: 0
+  likes: number; // Default: 0
+  createdAt: Date; // Auto-generated
+  updatedAt: Date; // Auto-generated
 }
 ```
 
@@ -586,6 +632,7 @@ interface Artwork {
 ## Rate Limiting
 
 Actualmente no hay límite de velocidad configurado. En producción se recomienda:
+
 - 100 requests por minuto por IP
 - 10 requests por segundo para POST/PATCH/DELETE
 
@@ -594,6 +641,7 @@ Actualmente no hay límite de velocidad configurado. En producción se recomiend
 ## CORS Configuration
 
 La API permite CORS desde:
+
 - `http://localhost:3000` (desarrollo)
 - `http://localhost:5000` (desarrollo)
 - URLs configuradas en `process.env.CLIENT_ORIGIN`
@@ -627,11 +675,13 @@ LOG_LEVEL=info
 ### Complete Workflow
 
 #### 1. Verificar que el servidor esté activo
+
 ```bash
 curl -X GET http://localhost:5000/api/health
 ```
 
 #### 2. Crear una obra
+
 ```bash
 curl -X POST http://localhost:5000/api/artworks \
   -H "Content-Type: application/json" \
@@ -644,6 +694,7 @@ curl -X POST http://localhost:5000/api/artworks \
 ```
 
 Response:
+
 ```json
 {
   "success": true,
@@ -664,16 +715,19 @@ Response:
 ```
 
 #### 3. Listar todas las obras
+
 ```bash
 curl -X GET http://localhost:5000/api/artworks
 ```
 
 #### 4. Obtener una obra específica
+
 ```bash
 curl -X GET http://localhost:5000/api/artworks/507f1f77bcf86cd799439011
 ```
 
 #### 5. Actualizar la obra (aumentar likes)
+
 ```bash
 curl -X PATCH http://localhost:5000/api/artworks/507f1f77bcf86cd799439011 \
   -H "Content-Type: application/json" \
@@ -681,6 +735,7 @@ curl -X PATCH http://localhost:5000/api/artworks/507f1f77bcf86cd799439011 \
 ```
 
 #### 6. Eliminar la obra
+
 ```bash
 curl -X DELETE http://localhost:5000/api/artworks/507f1f77bcf86cd799439011
 ```
@@ -693,6 +748,6 @@ Para reportar bugs o sugerir mejoras, contacta al equipo de desarrollo.
 
 ---
 
-**Last Updated**: January 15, 2024  
-**API Version**: 1.0.0  
+**Last Updated**: January 15, 2024
+**API Version**: 1.0.0
 **Status**: Active & Production Ready

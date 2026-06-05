@@ -4,20 +4,157 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+  padding: 5rem 0 4rem;
   position: relative;
   overflow: hidden;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(185, 104, 99, 0.22),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(214, 170, 116, 0.18),
+      transparent 30%
+    ),
+    linear-gradient(180deg, rgba(245, 241, 235, 0.9), rgba(255, 255, 255, 0.98));
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(185, 104, 99, 0.12);
+  color: var(--ifm-color-primary-darkest);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: clamp(2.7rem, 5vw, 4.6rem);
+  line-height: 0.95;
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 800;
+  opacity: 1;
+}
+
+.heroSubtitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary-darkest);
+}
+
+.heroCopy {
+  max-width: 42rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+/* Force readable colors when backgrounds are light */
+.heroBanner
+  :where(.kicker, .heroTitle, .heroSubtitle, .heroCopy, .buttons .button) {
+  color: #3b2a26 !important;
+  opacity: 1 !important;
+}
+
+.heroBanner .kicker {
+  background: rgba(185, 104, 99, 0.14);
+}
+
+/* Ensure hero buttons (primary and outline) have dark text for readability */
+.heroBanner .buttons .button {
+  color: #231815 !important;
+  font-weight: 700;
+}
+
+.heroBanner .buttons .button.button--outline {
+  border-color: rgba(91, 46, 40, 0.25) !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Specifically target the large outline API link to ensure dark text */
+.heroBanner .buttons a.button.button--outline.button--lg,
+.heroBanner .buttons a.button.button--lg {
+  color: #231815 !important;
+  background-color: transparent !important;
+  border-color: rgba(91, 46, 40, 0.28) !important;
+}
+
+.heroBanner .buttons a.button.button--outline.button--lg:hover {
+  background-color: rgba(35, 24, 21, 0.04) !important;
+}
+
+.heroBanner .buttons a.button svg {
+  fill: #231815 !important;
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 3rem 0 2rem;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
   }
 }
 
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.heroPanel {
+  padding: 1.25rem 1.35rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(185, 104, 99, 0.18);
+  box-shadow: 0 18px 50px rgba(36, 20, 12, 0.08);
+  backdrop-filter: blur(12px);
+  color: #3b2a26;
+}
+
+.panelLabel {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ifm-color-primary-dark);
+}
+
+.heroPanel strong {
+  display: block;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.heroPanel p {
+  margin-bottom: 1rem;
+}
+
+.panelList {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.panelList li + li {
+  margin-top: 0.35rem;
 }

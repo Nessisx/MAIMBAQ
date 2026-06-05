@@ -1,24 +1,26 @@
-# Requirements
+# Requisitos del Proyecto
 
-Este documento resume los requisitos del proyecto MAIMBAQ de forma clara y separada por tipo.
+Este documento resume el alcance real de MAIMBAQ: la app, el backend, el museo y la documentación.
 
 ## Funcionales
 
-- Permitir navegar entre las pantallas de creación, carga, resultado, museo y sobre nosotros.
+- Permitir navegar entre las pantallas de entrada, creación, resultado, museo y sobre nosotros.
 - Capturar o seleccionar una imagen del dibujo del usuario.
-- Simular o ejecutar el flujo de generación de la obra.
+- Analizar o simular el flujo de generación de la obra.
 - Mostrar el resultado con nombre de la obra, artista, estilo y fecha.
 - Guardar obras en el museo del usuario.
 - Permitir ver detalles de cada obra en un modal.
+- Acceder a la documentación técnica desde GitHub Pages.
 
 ## Técnicos
 
 - Usar Node.js con Express para el backend.
 - Conectar el backend con MongoDB mediante Mongoose.
-- Mantener una plantilla local de configuración separada del código.
+- Mantener la configuración sensible fuera del repositorio.
 - Evitar subir credenciales reales al repositorio.
 - Servir el frontend localmente desde el backend para pruebas.
 - Mantener rutas absolutas para navegación y assets cuando se ejecute en local.
+- Publicar la documentación en GitHub Pages con Docusaurus.
 
 ## Entorno local
 

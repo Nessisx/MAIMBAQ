@@ -12,6 +12,10 @@
 
 Aplicación web interactiva que transforma dibujos en experiencias digitales y los presenta en un museo virtual. MAIMBAQ combina una interfaz móvil-first con un backend en Node.js + MongoDB, integrando IA para análisis de poses con MediaPipe y TensorFlow.
 
+## Documentación Docusaurus
+
+- [DOCUSAURUS](https://nessisx.github.io/MAIMBAQ/)
+
 ## Qué incluye
 
 - 🎨 Conversión de dibujos en obras digitales mediante herramientas de procesamiento visual.
@@ -22,38 +26,6 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 - 🎭 API REST para la gestión de obras digitales mediante operaciones CRUD.
 - 📚 Documentación técnica y guías de uso del proyecto.
 - 🎯 Diseño inspirado en museos y espacios culturales digitales.
-
-## Galería de Pantallas
-
-### Página Principal
-
-![Página Inicial](frontend/src/assets/images/placeholder.png)
-_Interfaz de bienvenida con onboarding interactivo y acceso personalizado por nombre del usuario._
-
-### Dashboard
-
-![Dashboard](frontend/src/assets/images/pagina_inicial.png)
-_Centro de control con acceso rápido a las principales funciones de la aplicación._
-
-### Crear Obra
-
-![Crear Obra](frontend/src/assets/images/museo_beta.png)
-_Interfaz para capturar o subir dibujos y convertirlos en obras digitales._
-
-### Museo Virtual
-
-![Museo](frontend/src/assets/images/museo_beta.png)
-_Galería interactiva mostrando todas las obras creadas y compartidas por la comunidad._
-
-### Análisis de Poses (PoseAI)
-
-![PoseAI](frontend/src/assets/images/poseAI.png)
-_Herramienta de IA que analiza poses corporales con MediaPipe + TensorFlow en tiempo real._
-
-### Sobre Nosotros
-
-![Sobre Nosotros](frontend/src/assets/images/sobre_nosotros.png)
-_Información sobre el equipo, organización y propósito de MAIMBAQ._
 
 ## Despliegue en Heroku (cómo lo hicimos)
 
@@ -147,93 +119,6 @@ Opcional:
 CLIENT_ORIGIN=http://localhost:3000
 NODE_ENV=development
 ```
-
-## API REST
-
-### Base URL
-
-- Local: `http://localhost:5000/api`
-- Production: `https://tu-api.com/api`
-
-### Endpoints
-
-#### Health Check
-
-```http
-GET /api/health
-```
-
-Respuesta:
-
-```json
-{
-  "status": "ok",
-  "message": "Server is running"
-}
-```
-
-#### Listar todas las obras
-
-```http
-GET /api/artworks
-```
-
-Respuesta:
-
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "_id": "507f1f77bcf86cd799439011",
-      "title": "Dinosaurio Espacial",
-      "artist": "Carlos",
-      "style": "Fantasía",
-      "imageUrl": "https://..."
-    }
-  ]
-}
-```
-
-#### Obtener obra por ID
-
-```http
-GET /api/artworks/:id
-```
-
-#### Crear nueva obra
-
-```http
-POST /api/artworks
-Content-Type: application/json
-
-{
-  "title": "Dinosaurio Espacial",
-  "artist": "Carlos",
-  "style": "Fantasía",
-  "imageUrl": "https://..."
-}
-```
-
-#### Actualizar obra
-
-```http
-PATCH /api/artworks/:id
-Content-Type: application/json
-
-{
-  "title": "Nuevo título",
-  "style": "Realismo"
-}
-```
-
-#### Eliminar obra
-
-```http
-DELETE /api/artworks/:id
-```
-
-Para documentación interactiva completa, consulta [docs/api/README.md](docs/api/README.md).
 
 ## Documentación adicional
 

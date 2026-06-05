@@ -10,8 +10,8 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "My Site",
-  tagline: "Dinosaurs are cool",
+  title: "MAIMBAQ Docs",
+  tagline: "Documentación del proyecto MAIMBAQ",
   favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -20,15 +20,16 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
+  url: "https://nessisx.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
+  baseUrl: "/MAIMBAQ/",
+  trailingSlash: true,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "facebook", // Usually your GitHub org/user name.
-  projectName: "docusaurus", // Usually your repo name.
+  organizationName: "nessisx", // Usually your GitHub org/user name.
+  projectName: "MAIMBAQ", // Usually your repo name.
 
   onBrokenLinks: "throw",
 
@@ -51,8 +52,7 @@ const config = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          editUrl: "https://github.com/nessisx/MAIMBAQ/tree/main/docs/",
         },
         blog: {
           showReadingTime: true,
@@ -62,8 +62,7 @@ const config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          editUrl: "https://github.com/nessisx/MAIMBAQ/tree/main/blog/",
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
@@ -100,7 +99,7 @@ const config = {
           { to: "/docs/api", label: "API", position: "left" },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/your-repo",
+            href: "https://github.com/nessisx/MAIMBAQ",
             label: "GitHub",
             position: "right",
           },
