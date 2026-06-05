@@ -120,12 +120,6 @@ CLIENT_ORIGIN=http://localhost:3000
 NODE_ENV=development
 ```
 
-## Documentación adicional
-
-- [API Documentation](docs/api/README.md) — endpoints detallados y ejemplos
-- [Requirements](docs/requirements/README.md) — requisitos funcionales y técnicos
-- [API Spec (OpenAPI)](docs/api/swagger.json) — especificación OpenAPI/Swagger
-
 ## Paleta de Colores
 
 La aplicación utiliza una paleta de colores culturalmente contemporánea inspirada en museos, archivos y revistas literarias:
