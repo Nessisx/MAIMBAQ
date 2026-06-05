@@ -101,6 +101,61 @@ MAIMBAQ/
 └── manifest.json                       # Configuración PWA
 ```
 
+## Despliegue en Heroku (cómo lo hicimos)
+
+Adjunto aquí los pasos y las capturas que usamos para desplegar la app en Heroku.
+
+Pasos resumidos:
+
+1. Asegurar que el repositorio ignore dependencias, builds y archivos sensibles (`.gitignore`). Evitar subir `node_modules/` y `website/build/`.
+
+2. Añadir un `Procfile` para indicar a Heroku cómo iniciar la app. Ejemplos comunes:
+   - Si quieres que Heroku sirva el build de Docusaurus (sitio en `website/`):
+
+   ```text
+   web: npm run start --prefix website
+   ```
+
+   - Si prefieres que Heroku ejecute el backend Express (carpeta `backend/`):
+
+   ```text
+   web: npm --prefix backend start
+   ```
+
+3. Preparar `website/package.json` para que Heroku ejecute el build antes de start (ej. `heroku-postbuild`), y un `server.js` que sirva `website/build` con Express.
+
+4. Commit y push al remoto de Heroku:
+
+```bash
+git add .
+git commit -m "Prepare for Heroku deploy"
+heroku login
+heroku create <nombre-de-tu-app>
+git push heroku main
+```
+
+5. Configurar variables de entorno (por ejemplo `MONGODB_URL`) en Heroku:
+
+```bash
+heroku config:set MONGODB_URI="mongodb+srv://..."
+```
+
+Capturas:
+
+- Crear app en Heroku (ej. `heroku create`):
+
+  ![Heroku create placeholder](docs/images/Imagen%201%20-%20Creacion%20Heroku.png)
+
+  ![Heroku create placeholder](docs/images/Imagen%201.1%20-%20Creacion%20Heroku.png)
+
+- Push a Heroku (`git push heroku main`):
+
+  ![Heroku Push](docs/images/Imagen%202%20-%20Push%20del%20proyecto.png)
+
+- Subida exitosa:
+
+  ![Heroku uploaded](docs/images/Imagen%202%20-%20Push%20del%20proyecto.png)
+
 ## Ejecución local
 
 ### Frontend
