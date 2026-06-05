@@ -14,22 +14,14 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 
 ## Qué incluye
 
-- `index.html`: entrada principal con onboarding y acceso por nombre.
-- `pages/`: pantallas secundarias (`dashboard`, `crear`, `IA`, `resultado`, `museo`, `sobre`).
-- `frontend/src/`: recursos compartidos de la app (CSS, JS, assets).
-  - `apps/poseai/`: aplicación integrada de análisis de poses con IA
-- `backend/`: API REST con Express, Mongoose y conexión a MongoDB.
-- `docs/`: documentación de la API y los requisitos del proyecto.
-
-## Características clave
-
-- 🎨 Conversión de dibujos en obras digitales.
-- 🏛️ Museo interactivo con galería de obras.
-- 🤖 Análisis de poses con MediaPipe + TensorFlow (PoseAI integrado).
-- 📱 Flujo de usuario simple: crear → procesar → ver resultado.
-- 🔔 PWA con `manifest.json` y `sw.js`.
-- 🎭 Backend con CRUD de obras en `/api/artworks`.
-- 🎯 Experiencia culturalmente contemporánea: estética de museo, archivo histórico y revista literaria.
+- 🎨 Conversión de dibujos en obras digitales mediante herramientas de procesamiento visual.
+- 🤖 Análisis de poses con inteligencia artificial utilizando MediaPipe y TensorFlow.
+- 🏛️ Museo interactivo para explorar y visualizar las obras creadas.
+- 📱 Flujo intuitivo de usuario: crear, procesar y visualizar resultados.
+- 🔔 Compatibilidad con PWA para una experiencia más accesible desde distintos dispositivos.
+- 🎭 API REST para la gestión de obras digitales mediante operaciones CRUD.
+- 📚 Documentación técnica y guías de uso del proyecto.
+- 🎯 Diseño inspirado en museos y espacios culturales digitales.
 
 ## Galería de Pantallas
 
@@ -63,43 +55,7 @@ _Herramienta de IA que analiza poses corporales con MediaPipe + TensorFlow en ti
 ![Sobre Nosotros](frontend/src/assets/images/sobre_nosotros.png)
 _Información sobre el equipo, organización y propósito de MAIMBAQ._
 
-## Estructura del proyecto
 
-```
-MAIMBAQ/
-├── index.html                          # Entrada principal
-├── pages/                              # Páginas secundarias
-│   ├── dashboard.html
-│   ├── crear.html
-│   ├── museo.html
-│   ├── resultado.html
-│   └── sobre.html
-├── frontend/
-│   └── src/
-│       ├── css/                        # Estilos
-│       ├── js/                         # Lógica del cliente
-│       ├── apps/
-│       │   └── poseai/                 # Análisis de poses con IA
-│       └── assets/
-│           ├── images/                 # Capturas de pantalla
-│           ├── icons/                  # Íconos PWA
-│           └── fonts/                  # Tipografías
-├── backend/
-│   ├── package.json
-│   └── src/
-│       ├── app.js                      # Servidor Express
-│       ├── routes/                     # Endpoints API
-│       ├── models/                     # Modelos Mongoose
-│       ├── database/                   # Conexión DB
-│       ├── middlewares/                # Middleware personalizado
-│       └── utils/                      # Utilidades
-├── docs/
-│   ├── api/                            # Documentación de API
-│   └── requirements/                   # Requisitos del proyecto
-├── sitemap.xml                         # Mapa del sitio para SEO
-├── robots.txt                          # Configuración de bots
-└── manifest.json                       # Configuración PWA
-```
 
 ## Despliegue en Heroku (cómo lo hicimos)
 
