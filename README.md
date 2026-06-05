@@ -14,7 +14,7 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 
 ## Documentación Docusaurus
 
-- [DOCUSAURUS](https://nessisx.github.io/MAIMBAQ/)
+- [DocuSaurus](https://nessisx.github.io/MAIMBAQ/) Recomendamos borrar caché de pagina si ya abrió, anteriormente este mismo link.
 
 ## Qué incluye
 
