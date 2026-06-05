@@ -55,30 +55,28 @@ _Herramienta de IA que analiza poses corporales con MediaPipe + TensorFlow en ti
 ![Sobre Nosotros](frontend/src/assets/images/sobre_nosotros.png)
 _Información sobre el equipo, organización y propósito de MAIMBAQ._
 
-
-
 ## Despliegue en Heroku (cómo lo hicimos)
 
 Adjunto aquí los pasos y las capturas que usamos para desplegar la app en Heroku.
 
 Pasos resumidos:
 
-1. Asegurar que el repositorio ignore dependencias, builds y archivos sensibles (`.gitignore`). Evitar subir `node_modules/` y `website/build/`.
+1. Asegurar que el repositorio ignore dependencias, builds y archivos sensibles (`.gitignore`).
 
 2. Añadir un `Procfile` para indicar a Heroku cómo iniciar la app. Ejemplos comunes:
-   - Si quieres que Heroku sirva el build de Docusaurus (sitio en `website/`):
+   - Para que heroku sirva para el build de Docusaurus:
 
    ```text
    web: npm run start --prefix website
    ```
 
-   - Si prefieres que Heroku ejecute el backend Express (carpeta `backend/`):
+   - O para que Heroku ejecute el backend Express:
 
    ```text
    web: npm --prefix backend start
    ```
 
-3. Preparar `website/package.json` para que Heroku ejecute el build antes de start (ej. `heroku-postbuild`), y un `server.js` que sirva `website/build` con Express.
+3. Prepararamos el `website/package.json` para que Heroku ejecute el build antes de start (ej. `heroku-postbuild`), y un `server.js` que sirva `website/build` con Express.
 
 4. Commit y push al remoto de Heroku:
 
