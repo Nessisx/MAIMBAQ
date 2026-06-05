@@ -5,6 +5,14 @@
   width: 100%;
 }
 
+.features :global(.row) {
+  row-gap: 1.5rem;
+}
+
+.features :global(.col) {
+  margin-bottom: 0.5rem;
+}
+
 .sectionHeadingWrap {
   margin-bottom: 1.5rem;
 }
@@ -61,6 +69,14 @@
 }
 
 @media screen and (min-width: 997px) {
+  .features :global(.row) {
+    row-gap: 0;
+  }
+
+  .features :global(.col) {
+    margin-bottom: 0;
+  }
+
   .featureCard {
     margin-bottom: 0;
   }
