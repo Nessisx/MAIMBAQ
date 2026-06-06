@@ -25,6 +25,13 @@ const sidebars = {
     },
     "museo",
     "requirements/README",
+    {
+      type: "category",
+      label: "Despliegue",
+      link: { type: "doc", id: "deployment/intro" },
+      items: ["deployment/heroku", "deployment/azure"],
+    },
+    "contributors",
   ],
 };
 

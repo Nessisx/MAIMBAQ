@@ -121,16 +121,16 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
+                label: "Contribuidores",
+                to: "/docs/contributors",
               },
               {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
+                label: "GitHub Issues",
+                href: "https://github.com/nessisx/MAIMBAQ/issues",
               },
               {
-                label: "X",
-                href: "https://x.com/docusaurus",
+                label: "GitHub Discussions",
+                href: "https://github.com/nessisx/MAIMBAQ/discussions",
               },
             ],
           },
@@ -142,8 +142,8 @@ const config = {
                 to: "/blog",
               },
               {
-                label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                label: "GitHub Repository",
+                href: "https://github.com/nessisx/MAIMBAQ",
               },
             ],
           },

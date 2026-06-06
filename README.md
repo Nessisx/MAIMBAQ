@@ -12,9 +12,15 @@
 
 Aplicación web interactiva que transforma dibujos en experiencias digitales y los presenta en un museo virtual. MAIMBAQ combina una interfaz móvil-first con un backend en Node.js + MongoDB, integrando IA para análisis de poses con MediaPipe y TensorFlow.
 
-## Documentación Docusaurus
+## 📚 Enlaces Importantes
 
-- [DocuSaurus](https://nessisx.github.io/MAIMBAQ/) Recomendamos borrar caché de pagina si ya abrió anteriormente este mismo link.
+| Recurso                    | Link                                                                      |
+| -------------------------- | ------------------------------------------------------------------------- |
+| **Documentación Completa** | [📖 Docusaurus](https://nessisx.github.io/MAIMBAQ/)                       |
+| **Repositorio GitHub**     | [🐙 github.com/nessisx/MAIMBAQ](https://github.com/nessisx/MAIMBAQ)       |
+| **Despliegue & Guías**     | [🚀 Ver en Docusaurus](https://nessisx.github.io/MAIMBAQ/docs/deployment) |
+
+> **Nota**: Recomendamos borrar caché del navegador si ya visitó la documentación anteriormente.
 
 ## Qué incluye
 
@@ -27,61 +33,16 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 - 📚 Documentación técnica y guías de uso del proyecto.
 - 🎯 Diseño inspirado en museos y espacios culturales digitales.
 
-## Despliegue en Heroku (cómo lo hicimos)
+## Despliegue (Cómo lo hicimos)
 
-Adjunto aquí los pasos y las capturas que usamos para desplegar la app en Heroku.
+Para más detalles sobre cómo desplegamos MAIMBAQ, consulta la documentación completa en Docusaurus:
 
-Pasos resumidos:
+- **[Documentación de Despliegue](https://nessisx.github.io/MAIMBAQ/docs/deployment)** - Incluye:
+  - Pasos detallados de despliegue en Heroku (referencia histórica)
+  - Pasos de despliegue en Azure (plataforma actual)
+  - Evidencia fotográfica del proceso
 
-1. Asegurar que el repositorio ignore dependencias, builds y archivos sensibles (`.gitignore`).
-
-2. Añadir un `Procfile` para indicar a Heroku cómo iniciar la app. Ejemplos comunes:
-   - Para que heroku sirva para el build de Docusaurus:
-
-   ```text
-   web: npm run start --prefix website
-   ```
-
-   - O para que Heroku ejecute el backend Express:
-
-   ```text
-   web: npm --prefix backend start
-   ```
-
-3. Prepararamos el `website/package.json` para que Heroku ejecute el build antes de start (ej. `heroku-postbuild`), y un `server.js` que sirva `website/build` con Express.
-
-4. Commit y push al remoto de Heroku:
-
-```bash
-git add .
-git commit -m "Prepare for Heroku deploy"
-heroku login
-heroku create maimbaq-dba2ec399b00
-App pública: https://maimbaq-dba2ec399b00.herokuapp.com/
-git push heroku main
-```
-
-5. Configurar variables de entorno (por ejemplo `MONGODB_URL`) en Heroku:
-
-```bash
-heroku config:set MONGODB_URI="mongodb+srv://..."
-```
-
-Capturas:
-
-- Crear app en Heroku (ej. `heroku create`):
-
-  ![Heroku create placeholder](docs/images/Imagen%201%20-%20Creacion%20Heroku.png)
-
-  ![Heroku create placeholder](docs/images/Imagen%201.1%20-%20Creacion%20Heroku.png)
-
-- Push a Heroku (`git push heroku main`):
-
-  ![Heroku Push](docs/images/Imagen%202%20-%20Push%20del%20proyecto.png)
-
-- Subida exitosa:
-
-  ![Heroku uploaded](docs/images/Imagen%202%20-%20Push%20del%20proyecto.png)
+La documentación contiene todos los pasos, configuraciones y capturas necesarias para reproducir el despliegue.
 
 ## Ejecución local
 
