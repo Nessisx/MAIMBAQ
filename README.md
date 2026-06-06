@@ -32,17 +32,6 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 - 📚 Documentación técnica y guías de uso del proyecto.
 - 🎯 Diseño inspirado en museos y espacios culturales digitales.
 
-## Despliegue (Cómo lo hicimos)
-
-Para más detalles sobre cómo desplegamos MAIMBAQ, consulta la documentación completa en Docusaurus:
-
-- **[Documentación de Despliegue](https://nessisx.github.io/MAIMBAQ/docs/deployment)** - Incluye:
-  - Pasos detallados de despliegue en Heroku (referencia histórica)
-  - Configuración de dominio personalizado con GoDaddy
-  - Evidencia fotográfica del proceso
-
-La documentación contiene todos los pasos, configuraciones y capturas necesarias para reproducir el despliegue.
-
 ## Ejecución local
 
 ### Frontend
