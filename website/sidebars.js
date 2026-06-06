@@ -29,7 +29,7 @@ const sidebars = {
       type: "category",
       label: "Despliegue",
       link: { type: "doc", id: "deployment/intro" },
-      items: ["deployment/heroku", "deployment/azure"],
+      items: ["deployment/heroku"],
     },
     "contributors",
   ],
