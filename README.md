@@ -14,11 +14,10 @@ Aplicación web interactiva que transforma dibujos en experiencias digitales y l
 
 ## 📚 Enlaces Importantes
 
-| Recurso                    | Link                                                                      |
-| -------------------------- | ------------------------------------------------------------------------- |
-| **Documentación Completa** | [📖 Docusaurus](https://nessisx.github.io/MAIMBAQ/)                       |
-| **Repositorio GitHub**     | [🐙 github.com/nessisx/MAIMBAQ](https://github.com/nessisx/MAIMBAQ)       |
-| **Despliegue & Guías**     | [🚀 Ver en Docusaurus](https://nessisx.github.io/MAIMBAQ/docs/deployment) |
+| Recurso                    | Link                                                                |
+| -------------------------- | ------------------------------------------------------------------- |
+| **Documentación Completa** | [📖 Docusaurus](https://nessisx.github.io/MAIMBAQ/)                 |
+| **Repositorio GitHub**     | [🐙 github.com/nessisx/MAIMBAQ](https://github.com/nessisx/MAIMBAQ) |
 
 > **Nota**: Recomendamos borrar caché del navegador si ya visitó la documentación anteriormente.
 
@@ -39,7 +38,7 @@ Para más detalles sobre cómo desplegamos MAIMBAQ, consulta la documentación c
 
 - **[Documentación de Despliegue](https://nessisx.github.io/MAIMBAQ/docs/deployment)** - Incluye:
   - Pasos detallados de despliegue en Heroku (referencia histórica)
-  - Pasos de despliegue en Azure (plataforma actual)
+  - Configuración de dominio personalizado con GoDaddy
   - Evidencia fotográfica del proceso
 
 La documentación contiene todos los pasos, configuraciones y capturas necesarias para reproducir el despliegue.
